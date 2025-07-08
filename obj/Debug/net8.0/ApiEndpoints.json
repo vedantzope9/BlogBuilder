@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "RegisterUser",
+    "RelativePath": "api/Testing/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BlogBuilder.DTOs.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

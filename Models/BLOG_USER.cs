@@ -19,7 +19,6 @@ public partial class BLOG_USER
     public string USERNAME { get; set; }
 
     [Required]
-    [StringLength(250)]
     [Unicode(false)]
     public string PASSWORD { get; set; }
 

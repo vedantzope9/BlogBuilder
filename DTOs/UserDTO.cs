@@ -1,0 +1,15 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace BlogBuilder.DTOs
+{
+    public class UserDTO
+    {
+
+        public string USERNAME { get; set; }
+
+        public string PASSWORD { get; set; }
+
+        public string EMAIL { get; set; }
+    }
+}
