@@ -18,8 +18,6 @@ public partial class BLOG_USER
     [Unicode(false)]
     public string USERNAME { get; set; }
 
-    [Required]
-    [Unicode(false)]
     public string PASSWORD { get; set; }
 
     [Required]
@@ -29,4 +27,7 @@ public partial class BLOG_USER
 
     [InverseProperty("USER")]
     public virtual ICollection<BLOG> BLOG { get; set; } = new List<BLOG>();
+
+    [InverseProperty("USER")]
+    public virtual ICollection<BLOG_COMMENTS> BLOG_COMMENTS { get; set; } = new List<BLOG_COMMENTS>();
 }

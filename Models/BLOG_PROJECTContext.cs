@@ -15,6 +15,8 @@ public partial class BLOG_PROJECTContext : DbContext
 
     public virtual DbSet<BLOG> BLOG { get; set; }
 
+    public virtual DbSet<BLOG_COMMENTS> BLOG_COMMENTS { get; set; }
+
     public virtual DbSet<BLOG_USER> BLOG_USER { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +28,19 @@ public partial class BLOG_PROJECTContext : DbContext
             entity.Property(e => e.MODIFIED_DATE).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.USER).WithMany(p => p.BLOG).HasConstraintName("FK_BLOG_USERID");
+        });
+
+        modelBuilder.Entity<BLOG_COMMENTS>(entity =>
+        {
+            entity.HasKey(e => e.COMMENTID).HasName("PK_BLOG_COMMENTS_COMMENTID");
+
+            entity.HasOne(d => d.BLOG).WithMany(p => p.BLOG_COMMENTS)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BLOG_COMMENTS_BLOGID");
+
+            entity.HasOne(d => d.USER).WithMany(p => p.BLOG_COMMENTS)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BLOG_COMMENTS_USERID");
         });
 
         modelBuilder.Entity<BLOG_USER>(entity =>

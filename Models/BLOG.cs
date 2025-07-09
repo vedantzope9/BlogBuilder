@@ -27,6 +27,9 @@ public partial class BLOG
 
     public DateOnly? MODIFIED_DATE { get; set; }
 
+    [InverseProperty("BLOG")]
+    public virtual ICollection<BLOG_COMMENTS> BLOG_COMMENTS { get; set; } = new List<BLOG_COMMENTS>();
+
     [ForeignKey("USERID")]
     [InverseProperty("BLOG")]
     public virtual BLOG_USER USER { get; set; }
