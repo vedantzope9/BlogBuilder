@@ -21,5 +21,11 @@ namespace BlogBuilder.Controllers
         {
             return _userServices.RegisterUser(dto);
         }
+
+        [HttpPost("login")]
+        public JsonResult LoginUser(string email, string password)
+        {
+            return _userServices.LoginUser(email, password);
+        }
     }
 }

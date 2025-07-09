@@ -6,5 +6,6 @@ namespace BlogBuilder.BusinessLayer.Interfaces
     public interface IUserServices
     {
         JsonResult RegisterUser(UserDTO dto);
+        JsonResult LoginUser(string email, string password);
     }
 }

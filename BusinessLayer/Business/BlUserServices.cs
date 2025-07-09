@@ -16,9 +16,22 @@ namespace BlogBuilder.BusinessLayer.Business
             _userRepo = userRepo;
         }
 
+        public JsonResult LoginUser(string email, string password)
+        {
+
+            var entity = _userRepo.FindUserByEmail(email);
+
+            if (entity!=null && BCrypt.Net.BCrypt.EnhancedVerify(password, entity.PASSWORD))
+            {
+                return new JsonResult(new { success = true , message = "Login successful!" });
+            }
+
+            return new JsonResult(new { success = false, message = "Login Failed!" });
+        }
+
         public JsonResult RegisterUser(UserDTO dto)
         {
-            string password=BCrypt.Net.BCrypt.EnhancedHashPassword(dto.PASSWORD, 12);
+            string hashedPassword = HashPassword(dto.PASSWORD);
             try
             {
                 if (isEmailRepetitive(dto.EMAIL))
@@ -29,7 +42,7 @@ namespace BlogBuilder.BusinessLayer.Business
                 BLOG_USER user = new BLOG_USER()
                 {
                     USERNAME = dto.USERNAME,
-                    PASSWORD = password,
+                    PASSWORD = hashedPassword,
                     EMAIL = dto.EMAIL
                 };
 
@@ -48,12 +61,17 @@ namespace BlogBuilder.BusinessLayer.Business
                 throw new Exception(ex.Message);
             }
         }
+
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.EnhancedHashPassword(password , 12);
+        }
         
         private bool isEmailRepetitive(string email)
         {
             try
             {
-                return _userRepo.isEmailRepetitive(email);
+                return _userRepo.FindUserByEmail(email) != null;
             }
             catch(Exception ex)
             {

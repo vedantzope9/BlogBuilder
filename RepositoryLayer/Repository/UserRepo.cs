@@ -20,11 +20,11 @@ namespace BlogBuilder.RepositoryLayer.Repository
             return changes > 0;
         }
 
-        public bool isEmailRepetitive(string email)
+        public BLOG_USER FindUserByEmail(string email)
         {
            var entity= _context.BLOG_USER.Where(u => u.EMAIL == email).ToList();
 
-            return entity.Count>0;
+            return entity[0];
         }
     }
 }

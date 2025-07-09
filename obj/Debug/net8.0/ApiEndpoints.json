@@ -1,6 +1,27 @@
 [
   {
     "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "LoginUser",
+    "RelativePath": "api/Testing/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
     "Method": "RegisterUser",
     "RelativePath": "api/Testing/register",
     "HttpMethod": "POST",
