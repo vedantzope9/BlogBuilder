@@ -27,6 +27,9 @@ namespace BlogBuilder
             builder.Services.AddScoped<IUserRepo, UserRepo>();
             builder.Services.AddScoped<IUserServices, BlUserServices>();
 
+            builder.Services.AddScoped<IBlogRepo, BlogRepo>();
+            builder.Services.AddScoped<IBlogServices, BlBlogServices>();
+
 
             var app = builder.Build();
             if (app.Environment.IsDevelopment())

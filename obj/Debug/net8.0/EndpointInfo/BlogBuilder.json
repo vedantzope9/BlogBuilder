@@ -63,10 +63,132 @@
           }
         }
       }
+    },
+    "/api/Testing/GetAllBlogs": {
+      "get": {
+        "tags": [
+          "Testing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BlogDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BlogDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BlogDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Testing/GetBlogById": {
+      "get": {
+        "tags": [
+          "Testing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "BlogDTO": {
+        "type": "object",
+        "properties": {
+          "blogid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "topiC_NAME": {
+            "type": "string",
+            "nullable": true
+          },
+          "bloG_CONTENT": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagE_DATA": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "modifieD_DATE": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "bloG_COMMENTS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentsDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommentsDTO": {
+        "type": "object",
+        "properties": {
+          "commentid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "blogid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UserDTO": {
         "type": "object",
         "properties": {
@@ -80,6 +202,13 @@
           },
           "email": {
             "type": "string",
+            "nullable": true
+          },
+          "blog": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlogDTO"
+            },
             "nullable": true
           }
         },

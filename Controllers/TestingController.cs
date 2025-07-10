@@ -10,11 +10,16 @@ namespace BlogBuilder.Controllers
     public class TestingController : ControllerBase
     {
         private readonly IUserServices _userServices;
+        private readonly IBlogServices _blogServices;
 
-        public TestingController(IUserServices userServices)
+        public TestingController(IUserServices userServices , IBlogServices blogServices)
         {
             _userServices = userServices;
+            _blogServices = blogServices;
         }
+
+        
+
 
         [HttpPost("register")]
         public JsonResult RegisterUser(UserDTO dto)
@@ -26,6 +31,24 @@ namespace BlogBuilder.Controllers
         public JsonResult LoginUser(string email, string password)
         {
             return _userServices.LoginUser(email, password);
+        }
+
+        [HttpGet("GetAllBlogs")]
+        public List<BlogDTO> GetAllBlogs()
+        {
+            return _blogServices.GetAllBlogs();
+        }
+
+        [HttpGet("GetBlogById")]
+        public ActionResult GetBlogById(int id)
+        {
+            var blog = _blogServices.GetBlogById(id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(blog);
         }
     }
 }
