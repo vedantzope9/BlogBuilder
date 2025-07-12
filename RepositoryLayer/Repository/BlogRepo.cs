@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogBuilder.RepositoryLayer.Repository
 {
-    public class BlogRepo:IBlogRepo
+    public class BlogRepo : IBlogRepo
     {
         private readonly BLOG_PROJECTContext _context;
         public BlogRepo(BLOG_PROJECTContext context)
@@ -13,33 +13,14 @@ namespace BlogBuilder.RepositoryLayer.Repository
             _context = context;
         }
 
-        public List<BlogDTO> GetAllBlogs()
+        public List<BLOG> GetAllBlogs()
         {
             return _context.BLOG
                 .Include(b => b.BLOG_COMMENTS)
-                .Select(b => new BlogDTO
-                {
-                    BLOGID = b.BLOGID,
-                    USERID = b.USERID,
-                    TOPIC_NAME = b.TOPIC_NAME,
-                    BLOG_CONTENT = b.BLOG_CONTENT,
-                    IMAGE_DATA = b.IMAGE_DATA,
-                    MODIFIED_DATE = b.MODIFIED_DATE,
-                    isUpdated=b.isUpdated,
-
-                    BLOG_COMMENTS = b.BLOG_COMMENTS.Select(c => new CommentsDTO
-                    {
-                        COMMENTID = c.COMMENTID,
-                        BLOGID = c.BLOGID,
-                        USERID = c.USERID,
-                        COMMENT = c.COMMENT
-
-                    }).ToList()
-
-                }).ToList();
+                .ToList();
         }
 
-        public BlogDTO? GetBlogById(int id)
+        public BLOG? GetBlogById(int id)
         {
             var entity = _context.BLOG
                 .Include(b => b.BLOG_COMMENTS)
@@ -48,25 +29,48 @@ namespace BlogBuilder.RepositoryLayer.Repository
             if (entity == null)
                 return null;
 
-            return new BlogDTO
-            {
-                BLOGID = entity.BLOGID,
-                USERID = entity.USERID,
-                TOPIC_NAME = entity.TOPIC_NAME,
-                BLOG_CONTENT = entity.BLOG_CONTENT,
-                IMAGE_DATA = entity.IMAGE_DATA,
-                MODIFIED_DATE = entity.MODIFIED_DATE,
-                isUpdated=entity.isUpdated,
-
-                BLOG_COMMENTS = entity.BLOG_COMMENTS.Select(c => new CommentsDTO
-                {
-                    COMMENTID = c.COMMENTID,
-                    BLOGID = c.BLOGID,
-                    USERID = c.USERID,
-                    COMMENT = c.COMMENT
-
-                }).ToList()
-            };
+            return entity;
         }
+
+        public void CreateBlog(BLOG blog)
+        {
+            _context.BLOG.Add(blog);
+            _context.SaveChanges();
+        }
+
+        public bool UpdateBlog(BlogDTO updatedBlog)
+        {
+            var existingBlog = GetBlogById(updatedBlog.BLOGID);
+
+            if (existingBlog == null)
+                return false;
+
+            existingBlog.BLOG_CONTENT = updatedBlog.BLOG_CONTENT;
+            existingBlog.isUpdated = true;
+            existingBlog.TOPIC_NAME = updatedBlog.TOPIC_NAME;
+            existingBlog.IMAGE_DATA = updatedBlog.IMAGE_DATA;
+            existingBlog.MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now);
+
+            existingBlog.BLOG_COMMENTS = updatedBlog.BLOG_COMMENTS.Select(c => new BLOG_COMMENTS{
+                    COMMENT=c.COMMENT
+                }).ToList();
+
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteBlog(int blogId)
+        {
+            var entity = GetBlogById(blogId);
+
+            if (entity == null)
+                return false;
+
+            _context.BLOG.Remove(entity);
+            _context.SaveChanges();
+            return true;
+        }
+
+        
     }
 }

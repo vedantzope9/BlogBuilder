@@ -1,10 +1,16 @@
 ﻿using BlogBuilder.DTOs;
+using BlogBuilder.Models;
 
 namespace BlogBuilder.RepositoryLayer.Interfaces
 {
     public interface IBlogRepo
     {
-        List<BlogDTO> GetAllBlogs();
-        public BlogDTO? GetBlogById(int id);
+        List<BLOG> GetAllBlogs();
+        BLOG? GetBlogById(int id);
+
+        void CreateBlog(BLOG blog);
+
+        bool UpdateBlog(BlogDTO blog);
+        bool DeleteBlog(int blogId);
     }
 }

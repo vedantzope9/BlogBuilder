@@ -1,6 +1,9 @@
 ﻿using BlogBuilder.BusinessLayer.Interfaces;
 using BlogBuilder.DTOs;
+using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace BlogBuilder.BusinessLayer.Business
 {
@@ -17,7 +20,27 @@ namespace BlogBuilder.BusinessLayer.Business
         {
             try
             {
-                return _blogRepo.GetAllBlogs();
+                return _blogRepo.GetAllBlogs()
+                .Select(b => new BlogDTO
+                {
+                    BLOGID = b.BLOGID,
+                    USERID = b.USERID,
+                    TOPIC_NAME = b.TOPIC_NAME,
+                    BLOG_CONTENT = b.BLOG_CONTENT,
+                    IMAGE_DATA = b.IMAGE_DATA,
+                    MODIFIED_DATE = b.MODIFIED_DATE,
+                    isUpdated = b.isUpdated,
+
+                    BLOG_COMMENTS = b.BLOG_COMMENTS.Select(c => new CommentsDTO
+                    {
+                        COMMENTID = c.COMMENTID,
+                        BLOGID = c.BLOGID,
+                        USERID = c.USERID,
+                        COMMENT = c.COMMENT
+
+                    }).ToList()
+
+                }).ToList();
             }
             catch(Exception ex)
             {
@@ -29,7 +52,99 @@ namespace BlogBuilder.BusinessLayer.Business
         {
             try
             {
-                return _blogRepo.GetBlogById(id);
+                var entity = _blogRepo.GetBlogById(id);
+
+                if (entity == null)
+                    return null;
+
+                return new BlogDTO
+                {
+                    BLOGID = entity.BLOGID,
+                    USERID = entity.USERID,
+                    TOPIC_NAME = entity.TOPIC_NAME,
+                    BLOG_CONTENT = entity.BLOG_CONTENT,
+                    IMAGE_DATA = entity.IMAGE_DATA,
+                    MODIFIED_DATE = entity.MODIFIED_DATE,
+                    isUpdated = entity.isUpdated,
+
+                    BLOG_COMMENTS = entity.BLOG_COMMENTS.Select(c => new CommentsDTO
+                    {
+                        COMMENTID = c.COMMENTID,
+                        BLOGID = c.BLOGID,
+                        USERID = c.USERID,
+                        COMMENT = c.COMMENT
+
+                    }).ToList()
+                };
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public BlogDTO CreateBlog(BlogDTO blogDTO)
+        {
+            try
+            {
+                BLOG blog = new BLOG
+                {
+                    BLOGID = blogDTO.BLOGID,
+                    USERID = blogDTO.USERID,
+                    TOPIC_NAME = blogDTO.TOPIC_NAME,
+                    BLOG_CONTENT = blogDTO.BLOG_CONTENT,
+                    IMAGE_DATA = blogDTO.IMAGE_DATA,
+                    isUpdated = blogDTO.isUpdated,
+                    MODIFIED_DATE = blogDTO.MODIFIED_DATE,
+
+                    BLOG_COMMENTS = blogDTO.BLOG_COMMENTS.Select(c => new BLOG_COMMENTS
+                    {
+                        COMMENTID = c.COMMENTID,
+                        BLOGID = c.BLOGID,
+                        USERID = c.USERID,
+                        COMMENT = c.COMMENT
+
+                    }).ToList()
+                };
+
+                _blogRepo.CreateBlog(blog);
+
+                return blogDTO;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public BlogDTO UpdateBlog(BlogDTO blogDTO)
+        {
+            try
+            {
+                bool res = _blogRepo.UpdateBlog(blogDTO);
+
+                if(!res)
+                    throw new Exception("Blog not found");
+
+                return blogDTO;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool DeleteBlog(int blogId)
+        {
+            try
+            {
+                bool res = _blogRepo.DeleteBlog(blogId);
+
+                if (!res)
+                    throw new Exception("Blog not found!");
+
+                return true;
             }
             catch(Exception ex)
             {

@@ -50,5 +50,23 @@ namespace BlogBuilder.Controllers
 
             return Ok(blog);
         }
+
+        [HttpPost("CreateBlog")]
+        public ActionResult CreateBlog(BlogDTO blogDTO)
+        {
+            return Ok(_blogServices.CreateBlog(blogDTO));
+        }
+
+        [HttpPost("UpdateBlog")]
+        public ActionResult UpdateBlog(BlogDTO blogDTO)
+        {
+            return Ok(_blogServices.UpdateBlog(blogDTO));
+        }
+
+        [HttpDelete("DeleteBlog")]
+        public ActionResult DeleteBlog(int blogId)
+        {
+            return Ok(_blogServices.DeleteBlog(blogId));
+        }
     }
 }

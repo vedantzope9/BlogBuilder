@@ -30,6 +30,28 @@ namespace BlogBuilder.Controllers
 
             return View(blog);
         }
-        
+
+
+        [HttpPost]
+        public IActionResult CreateBlog(BlogDTO blogDTO)
+        {
+            _blogServices.CreateBlog(blogDTO);
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateBlog(BlogDTO blogDTO)
+        {
+            _blogServices.UpdateBlog(blogDTO);
+            return View();
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteBlog(int blogId)
+        {
+            _blogServices.DeleteBlog(blogId);
+            return View();
+        }
     }
 }

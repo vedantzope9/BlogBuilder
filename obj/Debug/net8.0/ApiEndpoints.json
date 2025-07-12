@@ -1,6 +1,38 @@
 [
   {
     "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "CreateBlog",
+    "RelativePath": "api/Testing/CreateBlog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogDTO",
+        "Type": "BlogBuilder.DTOs.BlogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "DeleteBlog",
+    "RelativePath": "api/Testing/DeleteBlog",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
     "Method": "GetAllBlogs",
     "RelativePath": "api/Testing/GetAllBlogs",
     "HttpMethod": "GET",
@@ -67,6 +99,22 @@
       {
         "Name": "dto",
         "Type": "BlogBuilder.DTOs.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "UpdateBlog",
+    "RelativePath": "api/Testing/UpdateBlog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogDTO",
+        "Type": "BlogBuilder.DTOs.BlogDTO",
         "IsRequired": true
       }
     ],

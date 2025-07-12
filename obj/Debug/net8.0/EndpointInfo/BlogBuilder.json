@@ -123,6 +123,90 @@
           }
         }
       }
+    },
+    "/api/Testing/CreateBlog": {
+      "post": {
+        "tags": [
+          "Testing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Testing/UpdateBlog": {
+      "post": {
+        "tags": [
+          "Testing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlogDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Testing/DeleteBlog": {
+      "delete": {
+        "tags": [
+          "Testing"
+        ],
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -156,6 +240,9 @@
             "type": "string",
             "format": "date",
             "nullable": true
+          },
+          "isUpdated": {
+            "type": "boolean"
           },
           "bloG_COMMENTS": {
             "type": "array",

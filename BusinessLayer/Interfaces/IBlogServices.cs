@@ -7,5 +7,11 @@ namespace BlogBuilder.BusinessLayer.Interfaces
     {
         List<BlogDTO> GetAllBlogs();
         BlogDTO? GetBlogById(int id);
+
+        BlogDTO CreateBlog(BlogDTO blogDTO);
+
+        BlogDTO UpdateBlog(BlogDTO blogDTO);
+        bool DeleteBlog(int blogId);
+
     }
 }
