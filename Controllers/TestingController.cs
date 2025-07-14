@@ -18,9 +18,6 @@ namespace BlogBuilder.Controllers
             _blogServices = blogServices;
         }
 
-        
-
-
         [HttpPost("register")]
         public JsonResult RegisterUser(UserDTO dto)
         {

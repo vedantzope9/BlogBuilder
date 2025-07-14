@@ -40,7 +40,10 @@ namespace BlogBuilder.RepositoryLayer.Repository
 
         public bool UpdateBlog(BlogDTO updatedBlog)
         {
-            var existingBlog = GetBlogById(updatedBlog.BLOGID);
+            var existingBlog = _context.BLOG
+                .Include(b => b.BLOG_COMMENTS)
+                .FirstOrDefault(b => b.BLOGID == updatedBlog.BLOGID);
+
 
             if (existingBlog == null)
                 return false;
@@ -51,9 +54,27 @@ namespace BlogBuilder.RepositoryLayer.Repository
             existingBlog.IMAGE_DATA = updatedBlog.IMAGE_DATA;
             existingBlog.MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now);
 
-            existingBlog.BLOG_COMMENTS = updatedBlog.BLOG_COMMENTS.Select(c => new BLOG_COMMENTS{
-                    COMMENT=c.COMMENT
-                }).ToList();
+            foreach (var updatedComment in updatedBlog.BLOG_COMMENTS)
+            {
+                var existingComment = existingBlog.BLOG_COMMENTS
+                    .FirstOrDefault(c => c.COMMENTID == updatedComment.COMMENTID);
+
+                if (existingComment != null)
+                {
+                    existingComment.COMMENT = updatedComment.COMMENT;
+                }
+                else
+                {
+                    // Add new comment if it doesn't exist
+                    existingBlog.BLOG_COMMENTS.Add(new BLOG_COMMENTS
+                    {
+                        BLOGID = updatedBlog.BLOGID,
+                        COMMENTID = updatedComment.COMMENTID,
+                        USERID = updatedComment.USERID,
+                        COMMENT = updatedComment.COMMENT
+                    });
+                }
+            }
 
             _context.SaveChanges();
             return true;
@@ -65,6 +86,11 @@ namespace BlogBuilder.RepositoryLayer.Repository
 
             if (entity == null)
                 return false;
+
+            foreach(var comments in entity.BLOG_COMMENTS)
+            {
+                _context.BLOG_COMMENTS.Remove(comments);
+            }
 
             _context.BLOG.Remove(entity);
             _context.SaveChanges();
