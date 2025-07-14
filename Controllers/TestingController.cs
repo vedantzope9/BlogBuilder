@@ -11,11 +11,13 @@ namespace BlogBuilder.Controllers
     {
         private readonly IUserServices _userServices;
         private readonly IBlogServices _blogServices;
+        private readonly ICommentsServices _commentsServices;
 
-        public TestingController(IUserServices userServices , IBlogServices blogServices)
+        public TestingController(IUserServices userServices , IBlogServices blogServices , ICommentsServices commentsServices)
         {
             _userServices = userServices;
             _blogServices = blogServices;
+            _commentsServices = commentsServices;
         }
 
         [HttpPost("register")]
@@ -64,6 +66,25 @@ namespace BlogBuilder.Controllers
         public ActionResult DeleteBlog(int blogId)
         {
             return Ok(_blogServices.DeleteBlog(blogId));
+        }
+
+        [HttpPost("AddComment")]
+        public ActionResult AddComment(CommentsDTO commentsDTO)
+        {
+            return Ok(_commentsServices.AddComment(commentsDTO));
+        }
+
+        [HttpPost("UpdateComment")]
+        public ActionResult UpdateComment(CommentsDTO commentsDTO)
+        {
+            return Ok(_commentsServices.UpdateComment(commentsDTO));
+        }
+
+        [HttpDelete("DeleteComment")]
+        public ActionResult DeleteComment(int commentId)
+        {
+            _commentsServices.DeleteComment(commentId);
+            return Ok("Comment Deleted!");
         }
     }
 }

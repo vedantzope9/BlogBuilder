@@ -30,6 +30,10 @@ namespace BlogBuilder
             builder.Services.AddScoped<IBlogRepo, BlogRepo>();
             builder.Services.AddScoped<IBlogServices, BlBlogServices>();
 
+            builder.Services.AddScoped<ICommentsRepo, CommentsRepo>();
+            builder.Services.AddScoped<ICommentsServices, BlCommentsServices>();
+    
+
 
             var app = builder.Build();
             if (app.Environment.IsDevelopment())

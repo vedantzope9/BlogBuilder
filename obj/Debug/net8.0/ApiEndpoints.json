@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "AddComment",
+    "RelativePath": "api/Testing/AddComment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentsDTO",
+        "Type": "BlogBuilder.DTOs.CommentsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
     "Method": "CreateBlog",
     "RelativePath": "api/Testing/CreateBlog",
     "HttpMethod": "POST",
@@ -25,6 +41,22 @@
     "Parameters": [
       {
         "Name": "blogId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "DeleteComment",
+    "RelativePath": "api/Testing/DeleteComment",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -115,6 +147,22 @@
       {
         "Name": "blogDTO",
         "Type": "BlogBuilder.DTOs.BlogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.TestingController",
+    "Method": "UpdateComment",
+    "RelativePath": "api/Testing/UpdateComment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentsDTO",
+        "Type": "BlogBuilder.DTOs.CommentsDTO",
         "IsRequired": true
       }
     ],
