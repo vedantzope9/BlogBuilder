@@ -18,6 +18,12 @@ namespace BlogBuilder.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult LoginUser()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult LoginUser(string email, string password)
         {

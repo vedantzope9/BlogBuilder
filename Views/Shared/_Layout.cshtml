@@ -9,40 +9,51 @@
     <link rel="stylesheet" href="~/BlogBuilder.styles.css" asp-append-version="true" />
 
     <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
 
-        body.dark-mode footer {
-            background-color: var(--footer-dark);
-            color: #888;
-        }
+                body > .container {
+                    flex: 1;
+                }
 
-        .navbar {
-            background: linear-gradient(to right, #a267e4, #8433c5);
-        }
+                body.dark-mode footer {
+                    background-color: var(--footer-dark);
+                    color: #888;
+                }
 
-        .navbar-brand,
-        .nav-link,
-        .toggle-btn {
-            color: #fff !important;
-            font-weight: 500;
-        }
+            .navbar {
+                background: linear-gradient(to right, #a267e4, #8433c5);
+            }
 
-        .navbar-brand {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+            .navbar-brand,
+            .nav-link,
+            .toggle-btn {
+                color: #fff !important;
+                font-weight: 500;
+            }
 
-        .toggle-btn {
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
+            .navbar-brand {
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
 
-        footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 1.05rem;
-            text-align: center;
-            transition: background-color 0.4s ease, color 0.3s ease;
-        }
+            .toggle-btn {
+                font-size: 1.4rem;
+                cursor: pointer;
+            }
+
+            footer {
+                background-color: #111;
+                color: #aaa;
+                padding: 1.05rem;
+                text-align: center;
+                transition: background-color 0.4s ease, color 0.3s ease;
+            }
     </style>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -91,5 +102,7 @@
             getStartedBtn.classList.add('clicked');
         });
     </script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>
