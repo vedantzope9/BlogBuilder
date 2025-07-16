@@ -7,43 +7,89 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BlogBuilder.styles.css" asp-append-version="true" />
+
+    <style>
+
+        body.dark-mode footer {
+            background-color: var(--footer-dark);
+            color: #888;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #a267e4, #8433c5);
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .toggle-btn {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .navbar-brand {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .toggle-btn {
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 1.05rem;
+            text-align: center;
+            transition: background-color 0.4s ease, color 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BlogBuilder</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">BlogBuilder</a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                <ul class="navbar-nav me-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                </ul>
+                <i class="fas fa-moon toggle-btn" id="themeToggle" title="Toggle Dark Mode"></i>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - BlogBuilder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer>
+        <p>© BlogBuilder — Designed and Developed by Vedant Zope</p>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        themeToggle.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            themeToggle.classList.toggle("fa-moon");
+            themeToggle.classList.toggle("fa-sun");
+        });
+
+        const getStartedBtn = document.querySelector('.cta-btn');
+        getStartedBtn.addEventListener('click', () => {
+            getStartedBtn.classList.remove('clicked');
+            void getStartedBtn.offsetWidth;
+            getStartedBtn.classList.add('clicked');
+        });
+    </script>
 </body>
 </html>

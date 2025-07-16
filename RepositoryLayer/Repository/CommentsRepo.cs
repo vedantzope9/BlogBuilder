@@ -40,6 +40,7 @@ namespace BlogBuilder.RepositoryLayer.Repository
                 return false;
 
             _context.BLOG_COMMENTS.Remove(entity);
+            _context.SaveChanges();
             return true;
         }
     }
