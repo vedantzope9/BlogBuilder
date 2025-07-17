@@ -1,7 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Login";
 }
 <style>
@@ -12,9 +10,13 @@
     }
 
     .login-section {
-        min-height: 100vh;
-        padding-top: 3rem;
+        min-height: calc(90vh - 90px);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
         background: linear-gradient(to bottom right, #fdfbfb, #d9f0ff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         transition: background 0.5s;
     }
 
@@ -35,7 +37,7 @@
     }
 
     .login-card input.form-control {
-        border-radius: 30px;
+        border-radius: 50px;
         font-size: 1rem;
     }
 
@@ -56,8 +58,6 @@
         font-size: 1.1rem;
         transition: all 0.4s ease;
         box-shadow: 0 0 12px rgba(138, 43, 226, 0.5);
-        position: relative;
-        overflow: hidden;
     }
 
     .cta-btn:hover {
@@ -74,38 +74,38 @@
         0% {
             background-position: left;
         }
+
         50% {
             background-position: right;
         }
+
         100% {
             background-position: left;
         }
     }
 </style>
 
-<section class="login-section d-flex justify-content-center align-items-center">
+<section class="login-section">
     <div class="card login-card p-4 shadow-lg rounded-4" style="max-width: 420px; width: 100%;">
         <h2 class="text-center mb-3" style="background: linear-gradient(to right, #8e44ad, #e67e22); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             Login to BlogBuilder
         </h2>
 
         <form id="loginForm">
-
             <div class="mb-3">
                 <label for="email" class="form-label fw-semibold">Email address</label>
                 <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="you@example.com" required>
             </div>
-
             <div class="mb-4">
                 <label for="password" class="form-label fw-semibold">Password</label>
                 <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
             </div>
-
             <button type="submit" class="btn w-100 cta-btn">Login</button>
         </form>
 
         <div class="text-center mt-4">
-            <p class="mb-0">Don't have an account?
+            <p class="mb-0">
+                Don't have an account?
                 <a href="/Account/Register" class="text-decoration-none fw-bold" style="color: var(--primary);"><u>Register here</u></a>
             </p>
         </div>
@@ -113,32 +113,32 @@
 </section>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> @* Ensure jQuery loaded *@
-
     <script>
         $(document).ready(function () {
+            // Ensure dark mode persists
+            const isDark = localStorage.getItem("theme") === "dark";
+            if (isDark) {
+                $('body').addClass('dark-mode');
+                $('#themeToggle').removeClass('fa-moon').addClass('fa-sun');
+            }
+
             $('#loginForm').on('submit', function (e) {
                 e.preventDefault();
-
                 const email = $('#email').val().trim();
                 const password = $('#password').val().trim();
-
                 const $btn = $('.cta-btn');
                 $btn.removeClass('clicked');
                 void $btn[0].offsetWidth;
                 $btn.addClass('clicked');
 
                 $.ajax({
-                    url: '/Account/LoginUser',
+                    url: '/User/LoginUser',
                     type: 'POST',
-                    data: {
-                        email: email,
-                        password: password
-                    },
+                    data: { email, password },
                     success: function (response) {
-                        console.log(response);
                         if (response.success) {
-                            window.location.href = "/Dashboard"; // or your authenticated landing
+                            alert("Login Successful!");
+                            window.location.href = "/Dashboard";
                         } else {
                             alert(response.message || "Invalid login credentials.");
                         }

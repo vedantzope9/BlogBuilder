@@ -7,72 +7,81 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BlogBuilder.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-            }
+        :root {
+            --bg-dark: #1e1e1e;
+            --text-dark: #f0f0f0;
+            --feature-bg-dark: #2a2a2a;
+            --footer-dark: #121212;
+        }
 
-                body > .container {
-                    flex: 1;
-                }
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-                body.dark-mode footer {
-                    background-color: var(--footer-dark);
-                    color: #888;
-                }
+        body.dark-mode {
+            background: var(--bg-dark) !important;
+            color: var(--text-dark);
+        }
 
-            .navbar {
-                background: linear-gradient(to right, #a267e4, #8433c5);
-            }
+        .navbar {
+            background: linear-gradient(to right, #a267e4, #8433c5);
+        }
 
-            .navbar-brand,
-            .nav-link,
-            .toggle-btn {
-                color: #fff !important;
-                font-weight: 500;
-            }
+        .navbar-brand,
+        .nav-link,
+        .toggle-btn {
+            color: #fff !important;
+            font-weight: 500;
+        }
 
-            .navbar-brand {
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            }
+        .toggle-btn {
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
 
-            .toggle-btn {
-                font-size: 1.4rem;
-                cursor: pointer;
-            }
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 1rem;
+            text-align: center;
+            transition: background-color 0.4s ease, color 0.3s ease;
+        }
 
-            footer {
-                background-color: #111;
-                color: #aaa;
-                padding: 1.05rem;
-                text-align: center;
-                transition: background-color 0.4s ease, color 0.3s ease;
-            }
+        body.dark-mode footer {
+            background-color: var(--footer-dark);
+            color: #888;
+        }
+
+        body > .container {
+            flex: 1;
+        }
     </style>
-
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid px-4">
-            <a class="navbar-brand" href="#">BlogBuilder</a>
+            <a class="navbar-brand" href="/">BlogBuilder</a>
             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navMenu">
                 <ul class="navbar-nav me-3">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/User/Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                 </ul>
-                <i class="fas fa-moon toggle-btn" id="themeToggle" title="Toggle Dark Mode"></i>
             </div>
+            <i class="fas fa-moon toggle-btn ms-3" id="themeToggle" title="Toggle Theme"></i>
         </div>
     </nav>
-    <div class="container">
+
+    <div class="container pt-5 mt-5">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -85,24 +94,28 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     <script>
         const themeToggle = document.getElementById("themeToggle");
         const body = document.body;
 
+        // Load theme on page load
+        const isDark = localStorage.getItem("theme") === "dark";
+        if (isDark) {
+            body.classList.add("dark-mode");
+            themeToggle.classList.remove("fa-moon");
+            themeToggle.classList.add("fa-sun");
+        }
+
         themeToggle.addEventListener("click", () => {
             body.classList.toggle("dark-mode");
+            const isDarkNow = body.classList.contains("dark-mode");
+            localStorage.setItem("theme", isDarkNow ? "dark" : "light");
             themeToggle.classList.toggle("fa-moon");
             themeToggle.classList.toggle("fa-sun");
         });
-
-        const getStartedBtn = document.querySelector('.cta-btn');
-        getStartedBtn.addEventListener('click', () => {
-            getStartedBtn.classList.remove('clicked');
-            void getStartedBtn.offsetWidth;
-            getStartedBtn.classList.add('clicked');
-        });
     </script>
-    @RenderSection("Scripts", required: false)
 
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
