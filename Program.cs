@@ -1,11 +1,14 @@
 using System;
+using System.Text;
 using BlogBuilder.BusinessLayer.Business;
 using BlogBuilder.BusinessLayer.Interfaces;
 using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
 using BlogBuilder.RepositoryLayer.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BlogBuilder
 {
@@ -32,10 +35,34 @@ namespace BlogBuilder
 
             builder.Services.AddScoped<ICommentsRepo, CommentsRepo>();
             builder.Services.AddScoped<ICommentsServices, BlCommentsServices>();
-    
 
+            builder.Services.AddScoped<JwtHelper>();
+
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                };
+            });
 
             var app = builder.Build();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

@@ -10,10 +10,12 @@ namespace BlogBuilder.BusinessLayer.Business
     public class BlUserServices:IUserServices
     {
         private readonly IUserRepo _userRepo;
+        private readonly JwtHelper _jwtHelper;
 
-        public BlUserServices(IUserRepo userRepo)
+        public BlUserServices(IUserRepo userRepo , JwtHelper jwtHelper)
         {
             _userRepo = userRepo;
+            _jwtHelper = jwtHelper;
         }
 
         public JsonResult LoginUser(string email, string password)
@@ -23,7 +25,14 @@ namespace BlogBuilder.BusinessLayer.Business
 
             if (entity!=null && BCrypt.Net.BCrypt.EnhancedVerify(password, entity.PASSWORD))
             {
-                return new JsonResult(new { success = true , message = "Login successful!" });
+                var token = _jwtHelper.GenerateToken(email);
+                return new JsonResult(new {
+                    success = true ,
+                    token = token,
+                    email = entity.EMAIL,
+                    username = entity.USERNAME,
+                    message = "Login successful!" 
+                });
             }
 
             return new JsonResult(new { success = false, message = "Login Failed!" });

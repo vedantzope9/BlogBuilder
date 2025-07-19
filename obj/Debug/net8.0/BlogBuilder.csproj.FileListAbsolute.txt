@@ -96,3 +96,4 @@ D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCo
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.MvcApplicationPartsAssemblyInfo.cs
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
