@@ -16,6 +16,9 @@ public partial class BLOG
     public int? USERID { get; set; }
 
     [Required]
+    public string BLOG_NAME { get; set; }
+
+    [Required]
     [StringLength(250)]
     [Unicode(false)]
     public string TOPIC_NAME { get; set; }

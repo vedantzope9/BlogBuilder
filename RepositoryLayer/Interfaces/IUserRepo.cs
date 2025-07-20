@@ -6,5 +6,6 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
     {
         bool RegisterUser(BLOG_USER user);
         BLOG_USER? FindUserByEmail(string email);
+        BLOG_USER? FindUserById(int userId);
     }
 }

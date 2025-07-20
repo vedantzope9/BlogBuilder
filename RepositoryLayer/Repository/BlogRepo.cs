@@ -50,6 +50,7 @@ namespace BlogBuilder.RepositoryLayer.Repository
 
             existingBlog.BLOG_CONTENT = updatedBlog.BLOG_CONTENT;
             existingBlog.isUpdated = true;
+            existingBlog.BLOG_NAME = updatedBlog.BLOG_NAME;
             existingBlog.TOPIC_NAME = updatedBlog.TOPIC_NAME;
             existingBlog.IMAGE_DATA = updatedBlog.IMAGE_DATA;
             existingBlog.MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now);

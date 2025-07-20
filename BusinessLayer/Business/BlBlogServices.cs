@@ -25,6 +25,7 @@ namespace BlogBuilder.BusinessLayer.Business
                 {
                     BLOGID = b.BLOGID,
                     USERID = b.USERID,
+                    BLOG_NAME=b.BLOG_NAME,
                     TOPIC_NAME = b.TOPIC_NAME,
                     BLOG_CONTENT = b.BLOG_CONTENT,
                     IMAGE_DATA = b.IMAGE_DATA,
@@ -61,6 +62,7 @@ namespace BlogBuilder.BusinessLayer.Business
                 {
                     BLOGID = entity.BLOGID,
                     USERID = entity.USERID,
+                    BLOG_NAME=entity.BLOG_NAME,
                     TOPIC_NAME = entity.TOPIC_NAME,
                     BLOG_CONTENT = entity.BLOG_CONTENT,
                     IMAGE_DATA = entity.IMAGE_DATA,
@@ -92,6 +94,7 @@ namespace BlogBuilder.BusinessLayer.Business
                 {
                     BLOGID = blogDTO.BLOGID,
                     USERID = blogDTO.USERID,
+                    BLOG_NAME = blogDTO.BLOG_NAME,
                     TOPIC_NAME = blogDTO.TOPIC_NAME,
                     BLOG_CONTENT = blogDTO.BLOG_CONTENT,
                     IMAGE_DATA = blogDTO.IMAGE_DATA,

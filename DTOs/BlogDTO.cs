@@ -11,6 +11,7 @@ namespace BlogBuilder.DTOs
 
         public int? USERID { get; set; }
 
+        public string BLOG_NAME { get; set; }
         public string TOPIC_NAME { get; set; }
 
         public string BLOG_CONTENT { get; set; }

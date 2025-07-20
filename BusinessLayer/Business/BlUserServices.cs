@@ -18,6 +18,21 @@ namespace BlogBuilder.BusinessLayer.Business
             _jwtHelper = jwtHelper;
         }
 
+        public string? GetUsernameByUserId(int userId)
+        {
+            try
+            {
+                var entity= _userRepo.FindUserById(userId);
+                if (entity != null)
+                    return entity.USERNAME;
+                return null;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public JsonResult LoginUser(string email, string password)
         {
 

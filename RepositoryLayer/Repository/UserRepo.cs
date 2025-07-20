@@ -26,5 +26,10 @@ namespace BlogBuilder.RepositoryLayer.Repository
 
             return entity.Count==0 ? null : entity[0];
         }
+
+        public BLOG_USER? FindUserById(int userId)
+        {
+            return _context.BLOG_USER.Find(userId);
+        }
     }
 }

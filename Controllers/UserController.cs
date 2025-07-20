@@ -24,6 +24,12 @@ namespace BlogBuilder.Controllers
             return View();
         }
 
+        [HttpGet] 
+        public string? GetUsernameByUserId(int userId)
+        {
+            return _userServices.GetUsernameByUserId(userId);
+        }
+
         [HttpPost]
         public JsonResult LoginUser(string email, string password)
         {
