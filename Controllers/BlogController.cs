@@ -1,5 +1,6 @@
 ﻿using BlogBuilder.BusinessLayer.Interfaces;
 using BlogBuilder.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogBuilder.Controllers
@@ -13,6 +14,7 @@ namespace BlogBuilder.Controllers
             _blogServices = blogServices;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var list = _blogServices.GetAllBlogs();
@@ -31,7 +33,7 @@ namespace BlogBuilder.Controllers
             return View(blog);
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult CreateBlog(BlogDTO blogDTO)
         {
@@ -39,7 +41,7 @@ namespace BlogBuilder.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateBlog(BlogDTO blogDTO)
         {
@@ -47,6 +49,7 @@ namespace BlogBuilder.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpDelete]
         public IActionResult DeleteBlog(int blogId)
         {

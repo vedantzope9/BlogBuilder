@@ -1,9 +1,11 @@
 ﻿using BlogBuilder.BusinessLayer.Interfaces;
 using BlogBuilder.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogBuilder.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
         private readonly ICommentsServices _commentsServices;

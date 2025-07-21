@@ -175,8 +175,9 @@
                     success: function (response) {
                         if (response.success) {
                             localStorage.setItem("jwtToken", response.token);
-                            alert("Login Successful!");
-                            window.location.href = "/Dashboard";
+                            localStorage.setItem("username", response.username);
+                            console.log("Login successful");
+                            window.location.href = "/Blog/Index";
                         } else {
                             alert(response.message || "Invalid login credentials.");
                         }

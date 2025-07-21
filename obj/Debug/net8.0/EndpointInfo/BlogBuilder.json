@@ -307,6 +307,10 @@
             "format": "int32",
             "nullable": true
           },
+          "bloG_NAME": {
+            "type": "string",
+            "nullable": true
+          },
           "topiC_NAME": {
             "type": "string",
             "nullable": true
