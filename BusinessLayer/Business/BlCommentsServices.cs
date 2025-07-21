@@ -22,7 +22,8 @@ namespace BlogBuilder.BusinessLayer.Business
                 {
                     BLOGID = commentsDTO.BLOGID,
                     USERID = commentsDTO.USERID,
-                    COMMENT = commentsDTO.COMMENT
+                    COMMENT = commentsDTO.COMMENT,
+                    MODIFIED_DATE=commentsDTO.MODIFIED_DATE
                 };
 
                 _commentsRepo.AddComment(comment);
@@ -44,7 +45,8 @@ namespace BlogBuilder.BusinessLayer.Business
                     COMMENTID = commentsDTO.COMMENTID,
                     BLOGID = commentsDTO.BLOGID,
                     USERID = commentsDTO.USERID,
-                    COMMENT = commentsDTO.COMMENT
+                    COMMENT = commentsDTO.COMMENT,
+                    MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now)
                 };
 
                 bool res = _commentsRepo.UpdateComment(comment);

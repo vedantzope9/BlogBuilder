@@ -21,6 +21,7 @@ namespace BlogBuilder.Controllers
             return View(list);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetBlogById(int id)
         {

@@ -27,6 +27,7 @@ namespace BlogBuilder.RepositoryLayer.Repository
                 return false;
 
             existingComment.COMMENT = updatedComment.COMMENT;
+            existingComment.MODIFIED_DATE = updatedComment.MODIFIED_DATE;
             _context.SaveChanges();
             return true;
 

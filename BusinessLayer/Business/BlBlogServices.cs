@@ -37,7 +37,8 @@ namespace BlogBuilder.BusinessLayer.Business
                         COMMENTID = c.COMMENTID,
                         BLOGID = c.BLOGID,
                         USERID = c.USERID,
-                        COMMENT = c.COMMENT
+                        COMMENT = c.COMMENT,
+                        MODIFIED_DATE=c.MODIFIED_DATE
 
                     }).ToList()
 
@@ -74,7 +75,8 @@ namespace BlogBuilder.BusinessLayer.Business
                         COMMENTID = c.COMMENTID,
                         BLOGID = c.BLOGID,
                         USERID = c.USERID,
-                        COMMENT = c.COMMENT
+                        COMMENT = c.COMMENT,
+                        MODIFIED_DATE=c.MODIFIED_DATE
 
                     }).ToList()
                 };
@@ -106,7 +108,8 @@ namespace BlogBuilder.BusinessLayer.Business
                         COMMENTID = c.COMMENTID,
                         BLOGID = c.BLOGID,
                         USERID = c.USERID,
-                        COMMENT = c.COMMENT
+                        COMMENT = c.COMMENT,
+                        MODIFIED_DATE=c.MODIFIED_DATE
 
                     }).ToList()
                 };

@@ -72,7 +72,8 @@ namespace BlogBuilder.RepositoryLayer.Repository
                         BLOGID = updatedBlog.BLOGID,
                         COMMENTID = updatedComment.COMMENTID,
                         USERID = updatedComment.USERID,
-                        COMMENT = updatedComment.COMMENT
+                        COMMENT = updatedComment.COMMENT,
+                        MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now)
                     });
                 }
             }

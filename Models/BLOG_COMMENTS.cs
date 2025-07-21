@@ -19,6 +19,8 @@ public partial class BLOG_COMMENTS
 
     public string COMMENT { get; set; }
 
+    public DateOnly? MODIFIED_DATE { get; set; }
+
     [ForeignKey("BLOGID")]
     [InverseProperty("BLOG_COMMENTS")]
     public virtual BLOG BLOG { get; set; }
