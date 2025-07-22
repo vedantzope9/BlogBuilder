@@ -4,6 +4,7 @@ using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq.Expressions;
 
 namespace BlogBuilder.BusinessLayer.Business
 {
@@ -96,6 +97,20 @@ namespace BlogBuilder.BusinessLayer.Business
             try
             {
                 return _userRepo.FindUserByEmail(email) != null;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Dictionary<int,string> GetAllUsernames()
+        {
+            try
+            {
+                var users = _userRepo.GetAllUsers();
+                var userMap = users.ToDictionary(u => u.USERID, u => u.USERNAME);
+                return userMap;
             }
             catch(Exception ex)
             {

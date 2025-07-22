@@ -22,7 +22,7 @@ namespace BlogBuilder.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("/Blog/GetBlogById/{id}")]
         public IActionResult GetBlogById(int id)
         {
             var blog = _blogServices.GetBlogById(id);

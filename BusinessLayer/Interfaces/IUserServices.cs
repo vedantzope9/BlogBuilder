@@ -8,5 +8,6 @@ namespace BlogBuilder.BusinessLayer.Interfaces
         JsonResult RegisterUser(UserDTO dto);
         JsonResult LoginUser(string email, string password);
         string? GetUsernameByUserId(int userId);
+        Dictionary<int, string> GetAllUsernames();
     }
 }

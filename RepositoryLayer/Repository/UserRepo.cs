@@ -31,5 +31,10 @@ namespace BlogBuilder.RepositoryLayer.Repository
         {
             return _context.BLOG_USER.Find(userId);
         }
+
+        public List<BLOG_USER> GetAllUsers()
+        {
+            return _context.BLOG_USER.ToList();
+        }
     }
 }

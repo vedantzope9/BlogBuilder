@@ -46,5 +46,11 @@ namespace BlogBuilder.Controllers
         {   
             return _userServices.RegisterUser(dto);
         }
+
+        [HttpGet]
+        public IActionResult GetAllUsernames()
+        {
+            return Ok(_userServices.GetAllUsernames());
+        }
     }
 }
