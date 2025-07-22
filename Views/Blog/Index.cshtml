@@ -126,40 +126,25 @@
             @foreach (var blog in Model)
             {
                 <div class="col">
-                    <div class="blog-card">
-                        @if (blog.IMAGE_DATA != null)
-                        {
-                            var base64Image = Convert.ToBase64String(blog.IMAGE_DATA);
-                            <img src="data:image/png;base64,@base64Image" alt="Blog Image" />
-                        }
-                        <div class="blog-body">
-                            <h5 class="blog-title">@blog.BLOG_NAME</h5>
-                            <p class="blog-meta" id="author-@blog.BLOGID">Author: Loading... • @blog.MODIFIED_DATE</p>
-                            <p class="blog-excerpt">
-                                @Html.Raw(blog.BLOG_CONTENT.Length > 250 ? blog.BLOG_CONTENT.Substring(0, 250) + "..." : blog.BLOG_CONTENT)
-                            </p>
+                    <a href="/Blog/GetBlogById/@blog.BLOGID" style="text-decoration: none; color: inherit;">
+                        <div class="blog-card">
+                            @if (blog.IMAGE_DATA != null)
+                            {
+                                var base64Image = Convert.ToBase64String(blog.IMAGE_DATA);
+                                <img src="data:image/png;base64,@base64Image" alt="Blog Image" />
+                            }
+                            <div class="blog-body">
+                                <h5 class="blog-title">@blog.BLOG_NAME</h5>
+                                <p class="blog-meta" id="author-@blog.BLOGID" data-userid="@blog.USERID">
+                                    Author: Loading... • @blog.MODIFIED_DATE
+                                </p>
+                                <p class="blog-excerpt">
+                                    @Html.Raw(blog.BLOG_CONTENT.Length > 250 ? blog.BLOG_CONTENT.Substring(0, 250) + "..." : blog.BLOG_CONTENT)
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
-                <script>
-                    fetch('/User/GetUsernameByUserId?userId=@blog.USERID')
-                        .then(res => res.text())
-                        .then(name => {
-                            const authorElem = document.getElementById("author-@blog.BLOGID");
-                            if (authorElem) {
-                                const originalText = authorElem.innerText;
-                                authorElem.innerText = "Author: " + name + originalText.substring(originalText.indexOf("•"));
-                            }
-                        })
-                        .catch(() => {
-                            const authorElem = document.getElementById("author-@blog.BLOGID");
-                            if (authorElem) {
-                                const originalText = authorElem.innerText;
-                                authorElem.innerText = "Author: Unknown" + originalText.substring(originalText.indexOf("•"));
-                            }
-                        });
-                </script>
             }
         </div>
     </div>
@@ -167,9 +152,28 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Greet user from localStorage
         const username = localStorage.getItem("username");
         if (username) {
             document.getElementById("welcome-text").textContent = "Welcome, " + username + "... 👋";
         }
+
+        // Collect all unique userIds from blog cards
+        const userIds = Array.from(document.querySelectorAll("[data-userid]"))
+            .map(el => el.getAttribute("data-userid"))
+            .filter((v, i, a) => a.indexOf(v) === i);
+
+        // Fetch all usernames in one call
+        fetch("/User/GetAllUsernames")
+            .then(res => res.json())
+            .then(userMap => {
+                document.querySelectorAll("[data-userid]").forEach(el => {
+                    const uid = el.getAttribute("data-userid");
+                    const name = userMap[uid] || "User";
+                    const parts = el.innerText.split("•");
+                    el.innerText = `Author: ${name} • ${parts[1]}`;
+                });
+            })
+            .catch(err => console.error("Error fetching usernames:", err));
     });
 </script>

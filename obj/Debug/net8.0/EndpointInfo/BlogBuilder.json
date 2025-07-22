@@ -5,6 +5,29 @@
     "version": "1.0"
   },
   "paths": {
+    "/Blog/GetBlogById/{id}": {
+      "get": {
+        "tags": [
+          "Blog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Testing/register": {
       "post": {
         "tags": [
@@ -359,6 +382,11 @@
           },
           "comment": {
             "type": "string",
+            "nullable": true
+          },
+          "modifieD_DATE": {
+            "type": "string",
+            "format": "date",
             "nullable": true
           }
         },
