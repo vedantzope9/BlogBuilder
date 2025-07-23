@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hh4907uxqE2pY7OxzmfZ60J4GpD/irj3NrIrXckOloc=",
+  "Hash": "G+gOEkJAs/8mSPWI3qlStKfbWD+/N0g2GMf9MZCjajI=",
   "Source": "BlogBuilder",
   "BasePath": "_content/BlogBuilder",
   "Mode": "Default",
@@ -1317,6 +1317,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\VisualStudioCommunity\\codes\\BlogBuilder\\wwwroot\\logo_BlogBuilder.png",
+      "SourceId": "BlogBuilder",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\VisualStudioCommunity\\codes\\BlogBuilder\\wwwroot\\",
+      "BasePath": "_content/BlogBuilder",
+      "RelativePath": "logo_BlogBuilder#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "k0m4a8cycd",
+      "Integrity": "jA3+hxMYmnHjLxgNA0P1otHHIOujSlctiiezMJfSrWU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\logo_BlogBuilder.png"
     }
   ],
   "Endpoints": [
@@ -6401,6 +6422,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "logo_BlogBuilder.k0m4a8cycd.png",
+      "AssetFile": "D:\\VisualStudioCommunity\\codes\\BlogBuilder\\wwwroot\\logo_BlogBuilder.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348694"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA3+hxMYmnHjLxgNA0P1otHHIOujSlctiiezMJfSrWU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 23 Jul 2025 15:33:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "k0m4a8cycd"
+        },
+        {
+          "Name": "label",
+          "Value": "logo_BlogBuilder.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA3+hxMYmnHjLxgNA0P1otHHIOujSlctiiezMJfSrWU="
+        }
+      ]
+    },
+    {
+      "Route": "logo_BlogBuilder.png",
+      "AssetFile": "D:\\VisualStudioCommunity\\codes\\BlogBuilder\\wwwroot\\logo_BlogBuilder.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348694"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA3+hxMYmnHjLxgNA0P1otHHIOujSlctiiezMJfSrWU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 23 Jul 2025 15:33:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA3+hxMYmnHjLxgNA0P1otHHIOujSlctiiezMJfSrWU="
         }
       ]
     }
