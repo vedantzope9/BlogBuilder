@@ -151,10 +151,23 @@
 </section>
 
 <script>
+    // On first load of session, clear any leftover data
+    if (!sessionStorage.getItem("sessionStarted")) {
+        sessionStorage.setItem("sessionStarted", "true");
+        localStorage.removeItem("jwtToken");
+        localStorage.removeItem("username");
+        localStorage.removeItem("userid");
+    }
+
+
     document.addEventListener("DOMContentLoaded", function () {
         // Greet user from localStorage
         const username = localStorage.getItem("username");
-        if (username) {
+        const jwtToken= localStorage.getItem("jwtToken");
+
+        console.log(username +" "+jwtToken);
+
+        if (jwtToken && username) {
             document.getElementById("welcome-text").textContent = "Welcome, " + username + "... 👋";
         }
 

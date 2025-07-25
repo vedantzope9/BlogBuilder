@@ -45,6 +45,7 @@ namespace BlogBuilder.BusinessLayer.Business
                 return new JsonResult(new {
                     success = true ,
                     token = token,
+                    userid = entity.USERID,
                     email = entity.EMAIL,
                     username = entity.USERNAME,
                     message = "Login successful!" 

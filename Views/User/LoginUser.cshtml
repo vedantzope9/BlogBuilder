@@ -175,6 +175,7 @@
                     success: function (response) {
                         if (response.success) {
                             localStorage.setItem("jwtToken", response.token);
+                            localStorage.setItem("userid", response.userid);
                             localStorage.setItem("username", response.username);
                             console.log("Login successful");
                             window.location.href = "/Blog/Index";

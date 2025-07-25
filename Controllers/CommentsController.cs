@@ -16,10 +16,13 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddComment(CommentsDTO commentsDTO)
+        public IActionResult AddComment([FromBody] CommentsDTO commentsDTO)
         {
+            if (commentsDTO == null || string.IsNullOrWhiteSpace(commentsDTO.COMMENT))
+                return BadRequest("Invalid comment data.");
+
             _commentsServices.AddComment(commentsDTO);
-            return View();
+            return Ok();
         }
 
         [HttpPost]
