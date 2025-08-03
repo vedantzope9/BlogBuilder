@@ -34,12 +34,18 @@ namespace BlogBuilder.Controllers
             return View(blog);
         }
 
+        [HttpGet("/Blog/CreateBlog")]
+        public IActionResult CreateBlog()
+        {
+            return View();
+        }
+
         [Authorize]
         [HttpPost]
-        public IActionResult CreateBlog(BlogDTO blogDTO)
+        public IActionResult CreateBlog(BlogDTO blogDTO , IFormFile image)
         {
-            _blogServices.CreateBlog(blogDTO);
-            return View();
+            _blogServices.CreateBlog(blogDTO , image);
+            return RedirectToAction("Index");
         }
 
         [Authorize]

@@ -27,6 +27,11 @@
         "Name": "blogDTO",
         "Type": "BlogBuilder.DTOs.BlogDTO",
         "IsRequired": true
+      },
+      {
+        "Name": "image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -170,6 +175,16 @@
   },
   {
     "ContainingType": "BlogBuilder.Controllers.BlogController",
+    "Method": "CreateBlog",
+    "RelativePath": "Blog/CreateBlog",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.BlogController",
     "Method": "GetBlogById",
     "RelativePath": "Blog/GetBlogById/{id}",
     "HttpMethod": "GET",
@@ -182,6 +197,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogBuilder.Controllers.UserController",
+    "Method": "ValidateToken",
+    "RelativePath": "ValidateToken",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

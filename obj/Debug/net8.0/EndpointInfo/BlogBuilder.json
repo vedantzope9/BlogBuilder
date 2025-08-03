@@ -28,6 +28,18 @@
         }
       }
     },
+    "/Blog/CreateBlog": {
+      "get": {
+        "tags": [
+          "Blog"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Testing/register": {
       "post": {
         "tags": [
@@ -154,17 +166,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BlogDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BlogDTO"
-              }
-            },
-            "application/*+json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/BlogDTO"
               }
@@ -307,6 +309,18 @@
               "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ValidateToken": {
+      "get": {
+        "tags": [
+          "User"
         ],
         "responses": {
           "200": {

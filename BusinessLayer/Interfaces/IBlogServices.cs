@@ -8,7 +8,7 @@ namespace BlogBuilder.BusinessLayer.Interfaces
         List<BlogDTO> GetAllBlogs();
         BlogDTO? GetBlogById(int id);
 
-        BlogDTO CreateBlog(BlogDTO blogDTO);
+        Task CreateBlog(BlogDTO blogDTO, IFormFile image);
 
         BlogDTO UpdateBlog(BlogDTO blogDTO);
         bool DeleteBlog(int blogId);

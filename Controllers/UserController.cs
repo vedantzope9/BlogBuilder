@@ -1,5 +1,6 @@
 ﻿using BlogBuilder.BusinessLayer.Interfaces;
 using BlogBuilder.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogBuilder.Controllers
@@ -16,6 +17,19 @@ namespace BlogBuilder.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet("ValidateToken")]
+        public IActionResult ValidateToken()
+        {
+            return Ok(new
+            {
+                success = true,
+                username = User.Identity?.Name,
+                userId = User.FindFirst("userid")?.Value
+            });
+
         }
 
         [HttpGet]

@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<BlogBuilder.DTOs.BlogDTO>
 @{
-    ViewData["Title"] = "All Blogs";
+    //All Blogs
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
 
 <style>
     body {
@@ -11,70 +14,77 @@
         transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-    body.dark-mode {
-        background-color: #121212;
-        color: #eee;
-    }
+        body.dark-mode {
+            background-color: #121212;
+            color: #eee;
+        }
 
     .dashboard-header {
-        padding: 1rem 0 0.5rem 0;
-        margin-bottom: 0;
+        padding: 1rem 0 1rem 0;
+        margin-bottom: 1rem;
+        text-align: center;
     }
 
     .welcome-text {
         font-size: 1.2rem;
         font-weight: 500;
         color: #6a1b9a;
-        margin-left: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
+        animation: fadeInDown 1s;
     }
 
-    body.dark-mode .welcome-text{
-        color:aliceblue;
+    body.dark-mode .welcome-text {
+        color: #f0e6ff;
     }
 
     .dashboard-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: bold;
-        text-align: center;
         background: linear-gradient(to right, #9b59b6, #e67e22);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: fadeInUp 1s ease-out;
-        margin-bottom: 1rem;
+        animation: fadeInUp 1s;
     }
 
-    @@keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .btn-gradient {
+        display: inline-block;
+        padding: 0.7rem 1.8rem;
+        border-radius: 50px;
+        background: linear-gradient(to right, #8e44ad, #5e2a7a);
+        color: #fff !important;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 18px rgba(142, 68, 173, 0.4);
+        text-decoration: none;
     }
+
+        .btn-gradient:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 28px rgba(142, 68, 173, 0.6);
+        }
 
     .blog-card {
         border-radius: 1rem;
         background: #fff;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         overflow: hidden;
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(0,0,0,0.08);
+        animation: fadeInUp 1s;
     }
 
-    .blog-card:hover {
-        transform: scale(1.02);
-        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
-    }
+        .blog-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+        }
 
-    .blog-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-    }
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
     .blog-body {
         padding: 1.2rem;
@@ -84,10 +94,11 @@
         font-size: 1.4rem;
         font-weight: bold;
         color: #5e2a7a;
+        margin-bottom: 0.5rem;
     }
 
     .blog-meta {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: #888;
         margin-bottom: 0.8rem;
     }
@@ -95,13 +106,12 @@
     .blog-excerpt {
         font-size: 1rem;
         line-height: 1.6;
-        color: #333;
+        color: #444;
     }
 
-    /* Dark Mode Styling */
+    /* Dark Mode */
     body.dark-mode .blog-card {
         background: #1e1e1e;
-        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
         border: 1px solid #333;
     }
 
@@ -118,8 +128,9 @@
 <section class="mt-1">
     <div class="container">
         <div class="dashboard-header">
-            <div class="welcome-text" id="welcome-text">Welcome, User... 👋</div>
+            <div class="welcome-text" id="welcome-text">Welcome... 👋</div>
             <div class="dashboard-title">Explore All Blogs</div>
+            <a href="javascript:void(0)" id="writeBlogBtn" class="btn btn-gradient">✍️ Write a Blog</a>
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -127,7 +138,7 @@
             {
                 <div class="col">
                     <a href="/Blog/GetBlogById/@blog.BLOGID" style="text-decoration: none; color: inherit;">
-                        <div class="blog-card">
+                        <div class="blog-card animate__animated animate__fadeInUp">
                             @if (blog.IMAGE_DATA != null)
                             {
                                 var base64Image = Convert.ToBase64String(blog.IMAGE_DATA);
@@ -151,32 +162,26 @@
 </section>
 
 <script>
-    // On first load of session, clear any leftover data
-    if (!sessionStorage.getItem("sessionStarted")) {
-        sessionStorage.setItem("sessionStarted", "true");
-        localStorage.removeItem("jwtToken");
-        localStorage.removeItem("username");
-        localStorage.removeItem("userid");
-    }
-
-
     document.addEventListener("DOMContentLoaded", function () {
-        // Greet user from localStorage
         const username = localStorage.getItem("username");
-        const jwtToken= localStorage.getItem("jwtToken");
-
-        console.log(username +" "+jwtToken);
+        const jwtToken = localStorage.getItem("jwtToken");
 
         if (jwtToken && username) {
             document.getElementById("welcome-text").textContent = "Welcome, " + username + "... 👋";
         }
 
-        // Collect all unique userIds from blog cards
-        const userIds = Array.from(document.querySelectorAll("[data-userid]"))
-            .map(el => el.getAttribute("data-userid"))
-            .filter((v, i, a) => a.indexOf(v) === i);
+        // Write Blog Button click
+        document.getElementById("writeBlogBtn").addEventListener("click", function () {
+            if (jwtToken && username) {
+                window.location.href = "/Blog/CreateBlog";
+                
+            } else {
+                alert("You must be logged in to write a blog.");
+                window.location.href = "/User/LoginUser";
+            }
+        });
 
-        // Fetch all usernames in one call
+        // Replace "Loading..." authors with real names
         fetch("/User/GetAllUsernames")
             .then(res => res.json())
             .then(userMap => {
