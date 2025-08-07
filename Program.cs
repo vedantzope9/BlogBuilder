@@ -14,6 +14,8 @@ namespace BlogBuilder
 {
     public class Program
     {
+        public static string AppVersion { get; } = DateTime.UtcNow.Ticks.ToString();
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -59,6 +61,12 @@ namespace BlogBuilder
             });
 
             var app = builder.Build();
+
+            app.Use(async (context, next) =>
+            {
+                context.Items["AppVersion"] = AppVersion;
+                await next.Invoke();
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();

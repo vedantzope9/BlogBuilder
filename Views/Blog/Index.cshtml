@@ -14,10 +14,10 @@
         transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #eee;
-        }
+    body.dark-mode {
+        background-color: #121212;
+        color: #eee;
+    }
 
     .dashboard-header {
         padding: 1rem 0 1rem 0;
@@ -128,7 +128,7 @@
 <section class="mt-1">
     <div class="container">
         <div class="dashboard-header">
-            <div class="welcome-text" id="welcome-text">Welcome... 👋</div>
+            <div class="welcome-text" id="welcome-text">Welcome 👋</div>
             <div class="dashboard-title">Explore All Blogs</div>
             <a href="javascript:void(0)" id="writeBlogBtn" class="btn btn-gradient">✍️ Write a Blog</a>
         </div>
@@ -163,26 +163,29 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const username = localStorage.getItem("username");
-        const jwtToken = localStorage.getItem("jwtToken");
+            const username = localStorage.getItem("username");
+            const jwtToken = localStorage.getItem("jwtToken");
 
-        if (jwtToken && username) {
-            document.getElementById("welcome-text").textContent = "Welcome, " + username + "... 👋";
-        }
+            console.log(jwtToken +" "+username);
 
-        // Write Blog Button click
-        document.getElementById("writeBlogBtn").addEventListener("click", function () {
             if (jwtToken && username) {
-                window.location.href = "/Blog/CreateBlog";
-                
-            } else {
-                alert("You must be logged in to write a blog.");
-                window.location.href = "/User/LoginUser";
+                document.getElementById("welcome-text").textContent =
+                    "Welcome, " + username + " 👋";
             }
-        });
 
-        // Replace "Loading..." authors with real names
-        fetch("/User/GetAllUsernames")
+            // Write Blog Button click
+            document.getElementById("writeBlogBtn").addEventListener("click", function () {
+
+                if (jwtToken && username) {
+                    window.location.href = "/Blog/CreateBlog";
+                } else {
+                    alert("You must be logged in to write a blog.");
+                    window.location.href = "/User/LoginUser";
+                }
+            });
+
+            // Replace "Loading..." authors with real names
+            fetch("/User/GetAllUsernames")
             .then(res => res.json())
             .then(userMap => {
                 document.querySelectorAll("[data-userid]").forEach(el => {

@@ -118,13 +118,6 @@
 </section>
 
 <script>
-    // On first load of session, clear any leftover data
-    if (!sessionStorage.getItem("sessionStarted")) {
-        sessionStorage.setItem("sessionStarted", "true");
-        localStorage.removeItem("jwtToken");
-        localStorage.removeItem("username");
-        localStorage.removeItem("userid");
-    }
 
     // Handle Get Started button click
     document.getElementById("startBtn").addEventListener("click", function (e) {

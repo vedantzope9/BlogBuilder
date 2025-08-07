@@ -145,18 +145,18 @@
                 $('#themeToggle').removeClass('fa-moon').addClass('fa-sun');
             }
 
-                    $('#togglePassword').on('click', function () {
-            const passwordInput = $('#password');
-            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
-            passwordInput.attr('type', type);
+            $('#togglePassword').on('click', function () {
+                const passwordInput = $('#password');
+                const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+                passwordInput.attr('type', type);
 
-            const icon = $(this).find('i');
-            if (type === 'text') {
-                icon.removeClass('fa-eye').addClass('fa-eye-slash');
-            } else {
-                icon.removeClass('fa-eye-slash').addClass('fa-eye');
-            }
-        });
+                const icon = $(this).find('i');
+                if (type === 'text') {
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
 
 
             $('#loginForm').on('submit', function (e) {

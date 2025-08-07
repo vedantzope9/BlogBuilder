@@ -11,6 +11,7 @@ D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\BlogBuilder.pdb
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Azure.Core.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Azure.Identity.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
@@ -27,9 +28,13 @@ D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.IdentityMo
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.OpenApi.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.SqlServer.Types.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\System.Drawing.Common.dll
 D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
@@ -67,6 +72,7 @@ D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.Generate
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.AssemblyInfoInputs.cache
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.AssemblyInfo.cs
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.csproj.CoreCompileInputs.cache
+D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.MvcApplicationPartsAssemblyInfo.cs
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.MvcApplicationPartsAssemblyInfo.cache
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.RazorAssemblyInfo.cache
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.RazorAssemblyInfo.cs
@@ -91,9 +97,3 @@ D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\refint\BlogBuilder.d
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.pdb
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.genruntimeconfig.cache
 D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\ref\BlogBuilder.dll
-D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.OpenApi.dll
-D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\VisualStudioCommunity\codes\BlogBuilder\obj\Debug\net8.0\BlogBuilder.MvcApplicationPartsAssemblyInfo.cs
-D:\VisualStudioCommunity\codes\BlogBuilder\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

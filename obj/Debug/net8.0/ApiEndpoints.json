@@ -198,15 +198,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BlogBuilder.Controllers.UserController",
-    "Method": "ValidateToken",
-    "RelativePath": "ValidateToken",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
   }
 ]

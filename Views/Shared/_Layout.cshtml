@@ -101,7 +101,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
-         const themeToggle = document.getElementById("themeToggle");
+        const themeToggle = document.getElementById("themeToggle");
         const body = document.body;
 
         // Load theme on page load
@@ -120,43 +120,23 @@
             themeToggle.classList.toggle("fa-sun");
         });
 
+        
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const token = localStorage.getItem("jwtToken");
+        const currentVersion = '@Context.Items["AppVersion"]';
+        const storedVersion = localStorage.getItem("appVersion");
 
-            if (token) {
-                fetch("/User/ValidateToken", {
-                    headers: { "Authorization": `Bearer ${token}` }
-                })
-                .then(res => {
-                    if (res.status === 401) {
+        console.log(currentVersion  +" "+storedVersion);
 
-                        localStorage.removeItem("jwtToken");
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("userid");
-                        return null;
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    if (data && data.success) {
-                        localStorage.setItem("username", data.username);
-                        localStorage.setItem("userid", data.userId);
-                    }
-                })
-                .catch(() => {
-                    localStorage.removeItem("jwtToken");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("userid");
-                });
-            }
-            else {
-                localStorage.removeItem("jwtToken");
-                localStorage.removeItem("username");
-                localStorage.removeItem("userid");
-            }
-        });
+        if(currentVersion !== storedVersion){
+             localStorage.removeItem("jwtToken");
+             localStorage.removeItem("username");
+             localStorage.removeItem("userid");
+
+             localStorage.setItem("appVersion" , currentVersion);
+        }
+
     </script>
+
 
 
     @RenderSection("Scripts", required: false)

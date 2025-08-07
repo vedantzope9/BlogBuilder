@@ -19,19 +19,6 @@ namespace BlogBuilder.Controllers
             return View();
         }
 
-        [Authorize]
-        [HttpGet("ValidateToken")]
-        public IActionResult ValidateToken()
-        {
-            return Ok(new
-            {
-                success = true,
-                username = User.Identity?.Name,
-                userId = User.FindFirst("userid")?.Value
-            });
-
-        }
-
         [HttpGet]
         public IActionResult LoginUser()
         {

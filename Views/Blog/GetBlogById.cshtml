@@ -317,12 +317,6 @@
             document.body.classList.add("dark-mode");
         }
 
-        // Set welcome text safely
-        const username = localStorage.getItem("username") || "Guest";
-        const welcomeEl = document.getElementById("welcome-text");
-        if (welcomeEl) {
-            welcomeEl.textContent = `Welcome, ${username}... 👋`;
-        }
 
         // Unique user IDs (for author and comments)
         const userIds = [...new Set(Array.from(document.querySelectorAll("[data-userid]"))
@@ -360,6 +354,8 @@
         const userId = localStorage.getItem("userid");
         const token = localStorage.getItem("jwtToken");
 
+        console.log(userId +" "+token);
+
         // Cancel clears textarea
         cancelBtn.addEventListener("click", () => {
             commentBox.value = "";
@@ -384,7 +380,7 @@
                 USERID: parseInt(userId)
             };
 
-            console.log(data);
+           // console.log(data);
 
             fetch("/Comments/AddComment", {
                 method: "POST",
