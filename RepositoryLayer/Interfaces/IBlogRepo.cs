@@ -8,7 +8,7 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
         List<BLOG> GetAllBlogs();
         BLOG? GetBlogById(int id);
 
-        void CreateBlog(BLOG blog);
+        Task CreateBlog(BLOG blog);
 
         bool UpdateBlog(BlogDTO blog);
         bool DeleteBlog(int blogId);

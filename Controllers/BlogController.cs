@@ -42,9 +42,9 @@ namespace BlogBuilder.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreateBlog(BlogDTO blogDTO , IFormFile image)
+        public async Task<IActionResult> CreateBlog([FromForm] BlogDTO blogDTO)
         {
-            _blogServices.CreateBlog(blogDTO , image);
+            await _blogServices.CreateBlog(blogDTO );
             return RedirectToAction("Index");
         }
 

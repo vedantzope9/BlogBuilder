@@ -32,10 +32,10 @@ namespace BlogBuilder.RepositoryLayer.Repository
             return entity;
         }
 
-        public void CreateBlog(BLOG blog)
+        public async Task CreateBlog(BLOG blog)
         {
             _context.BLOG.Add(blog);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public bool UpdateBlog(BlogDTO updatedBlog)

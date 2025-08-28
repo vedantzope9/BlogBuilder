@@ -87,13 +87,15 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public async Task CreateBlog(BlogDTO blogDTO , IFormFile image)
+        public async Task CreateBlog(BlogDTO blogDTO )
         {
-            if (image != null)
+            byte[] img = null;
+
+            if (blogDTO.image != null && blogDTO.image.Length>0)
             {
                 using var ms = new MemoryStream();
-                await image.CopyToAsync(ms);
-                blogDTO.IMAGE_DATA = ms.ToArray();
+                await blogDTO.image.CopyToAsync(ms);
+                img = ms.ToArray();
             }
 
             try
@@ -105,22 +107,12 @@ namespace BlogBuilder.BusinessLayer.Business
                     BLOG_NAME = blogDTO.BLOG_NAME,
                     TOPIC_NAME = blogDTO.TOPIC_NAME,
                     BLOG_CONTENT = blogDTO.BLOG_CONTENT,
-                    IMAGE_DATA = blogDTO.IMAGE_DATA,
+                    IMAGE_DATA = img,
                     isUpdated = false,
-                    MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now),
-
-                    BLOG_COMMENTS = blogDTO.BLOG_COMMENTS.Select(c => new BLOG_COMMENTS
-                    {
-                        COMMENTID = c.COMMENTID,
-                        BLOGID = c.BLOGID,
-                        USERID = c.USERID,
-                        COMMENT = c.COMMENT,
-                        MODIFIED_DATE=c.MODIFIED_DATE
-
-                    }).ToList()
+                    MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now)
                 };
 
-                _blogRepo.CreateBlog(blog);
+                await _blogRepo.CreateBlog(blog);
             }
             catch(Exception ex)
             {

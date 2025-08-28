@@ -51,9 +51,9 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost("CreateBlog")]
-        public ActionResult CreateBlog(BlogDTO blogDTO , IFormFile image)
+        public ActionResult CreateBlog(BlogDTO blogDTO )
         {
-            return Ok(_blogServices.CreateBlog(blogDTO , image));
+            return Ok(_blogServices.CreateBlog(blogDTO ));
         }
 
         [HttpPost("UpdateBlog")]

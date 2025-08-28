@@ -6,6 +6,7 @@ using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
 using BlogBuilder.RepositoryLayer.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -58,6 +59,16 @@ namespace BlogBuilder
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                 };
+            });
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 10 * 1024 * 1024; 
+            });
+
+            builder.WebHost.ConfigureKestrel((context, options) =>
+            {
+                options.Limits.MaxRequestBodySize = 10 * 1024 * 1024; 
             });
 
             var app = builder.Build();

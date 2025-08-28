@@ -17,6 +17,7 @@ namespace BlogBuilder.DTOs
         public string BLOG_CONTENT { get; set; }
 
         public byte[] IMAGE_DATA { get; set; }
+        public IFormFile image { get; set; }
 
         public DateOnly? MODIFIED_DATE { get; set; }
 
