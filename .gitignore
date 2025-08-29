@@ -1,3 +1,17 @@
-	.vs/
-	obj/
-	bin/
+.vs/
+**/.vs/
+
+# Build outputs  
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Compiled binaries
+*.dll
+*.exe
+*.pdb
+
+# Cache files
+*.cache
+*.tmp
