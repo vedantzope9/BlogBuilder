@@ -63,5 +63,14 @@ namespace BlogBuilder.Controllers
             _blogServices.DeleteBlog(blogId);
             return View();
         }
+
+        [Authorize]
+        [HttpGet("/Blog/GetBlogsByUserId/{userId}")]
+        public async Task<IActionResult> GetBlogsByUserId(int userId)
+        {
+            List<BlogDTO> ? list = await _blogServices.GetBlogsbyUserId(userId);
+
+            return View(list);
+        }
     }
 }

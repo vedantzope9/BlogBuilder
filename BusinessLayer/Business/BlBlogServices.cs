@@ -153,5 +153,43 @@ namespace BlogBuilder.BusinessLayer.Business
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<BlogDTO>? > GetBlogsbyUserId(int userId)
+        {
+            try
+            {
+                var blogs = await _blogRepo.GetBlogsByUserId(userId);
+
+                if (blogs == null)
+                    return null;
+
+                return blogs
+                    .Select(b => new BlogDTO{
+                        BLOGID = b.BLOGID,
+                        USERID = b.USERID,
+                        BLOG_NAME = b.BLOG_NAME,
+                        TOPIC_NAME = b.TOPIC_NAME,
+                        BLOG_CONTENT = b.BLOG_CONTENT,
+                        IMAGE_DATA = b.IMAGE_DATA,
+                        MODIFIED_DATE = b.MODIFIED_DATE,
+                        isUpdated = b.isUpdated,
+
+                        BLOG_COMMENTS = b.BLOG_COMMENTS.Select(c => new CommentsDTO
+                        {
+                            COMMENTID = c.COMMENTID,
+                            BLOGID = c.BLOGID,
+                            USERID = c.USERID,
+                            COMMENT = c.COMMENT,
+                            MODIFIED_DATE = c.MODIFIED_DATE
+
+                        }).ToList()
+
+                    }).ToList();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
 
         bool UpdateBlog(BlogDTO blog);
         bool DeleteBlog(int blogId);
+
+        Task<List<BLOG>? > GetBlogsByUserId(int userId);
     }
 }

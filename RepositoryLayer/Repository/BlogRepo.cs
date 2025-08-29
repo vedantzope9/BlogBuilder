@@ -99,6 +99,11 @@ namespace BlogBuilder.RepositoryLayer.Repository
             return true;
         }
 
-        
+        public async Task<List<BLOG>? > GetBlogsByUserId(int userId)
+        {
+            return await _context.BLOG
+                    .Where(b => b.USERID == userId)
+                    .ToListAsync();
+        }
     }
 }

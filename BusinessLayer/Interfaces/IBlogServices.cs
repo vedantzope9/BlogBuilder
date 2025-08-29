@@ -13,5 +13,6 @@ namespace BlogBuilder.BusinessLayer.Interfaces
         BlogDTO UpdateBlog(BlogDTO blogDTO);
         bool DeleteBlog(int blogId);
 
+        Task<List<BlogDTO>?> GetBlogsbyUserId(int userId);
     }
 }
