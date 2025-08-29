@@ -14,7 +14,7 @@ namespace BlogBuilder.BusinessLayer.Business
             _commentsRepo=commentsRepo;
         }
 
-        public CommentsDTO AddComment(CommentsDTO commentsDTO)
+        public async Task<CommentsDTO> AddComment(CommentsDTO commentsDTO)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace BlogBuilder.BusinessLayer.Business
                     MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now)
                 };
 
-                _commentsRepo.AddComment(comment);
+                await _commentsRepo.AddComment(comment);
                 return commentsDTO;
             }
             catch(Exception ex)
@@ -36,7 +36,7 @@ namespace BlogBuilder.BusinessLayer.Business
         }
 
 
-        public CommentsDTO UpdateComment(CommentsDTO commentsDTO)
+        public async Task<CommentsDTO> UpdateComment(CommentsDTO commentsDTO)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace BlogBuilder.BusinessLayer.Business
                     MODIFIED_DATE = DateOnly.FromDateTime(DateTime.Now)
                 };
 
-                bool res = _commentsRepo.UpdateComment(comment);
+                bool res =await _commentsRepo.UpdateComment(comment);
 
                 if (!res)
                     throw new Exception("Unable to Update Comment!");
@@ -62,11 +62,11 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public bool DeleteComment(int commentId)
+        public async Task<bool> DeleteComment(int commentId)
         {
             try
             {
-                bool res = _commentsRepo.DeleteComment(commentId);
+                bool res =await _commentsRepo.DeleteComment(commentId);
 
                 if (!res)
                     throw new Exception("Comment not found");

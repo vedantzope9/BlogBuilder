@@ -21,11 +21,11 @@ namespace BlogBuilder.BusinessLayer.Business
             _jwtHelper = jwtHelper;
         }
 
-        public string? GetUsernameByUserId(int userId)
+        public async Task<string?> GetUsernameByUserId(int userId)
         {
             try
             {
-                var entity= _userRepo.FindUserById(userId);
+                var entity= await _userRepo.FindUserById(userId);
                 if (entity != null)
                     return entity.USERNAME;
                 return null;
@@ -36,10 +36,10 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public JsonResult LoginUser(string email, string password)
+        public async Task<JsonResult> LoginUser(string email, string password)
         {
 
-            var entity = _userRepo.FindUserByEmail(email);
+            var entity = await _userRepo.FindUserByEmail(email);
 
             if (entity!=null && BCrypt.Net.BCrypt.EnhancedVerify(password, entity.PASSWORD))
             {
@@ -57,12 +57,12 @@ namespace BlogBuilder.BusinessLayer.Business
             return new JsonResult(new { success = false, message = "Login Failed!" });
         }
 
-        public JsonResult RegisterUser(UserDTO dto)
+        public async Task<JsonResult> RegisterUser(UserDTO dto)
         {
             string hashedPassword = HashPassword(dto.PASSWORD);
             try
             {
-                if (isEmailRepetitive(dto.EMAIL))
+                if (await isEmailRepetitive(dto.EMAIL))
                 {
                     return new JsonResult(new { success = false, message = "Registration failed! This Email is already used.  Try with different Email." });
                 }
@@ -74,7 +74,7 @@ namespace BlogBuilder.BusinessLayer.Business
                     EMAIL = dto.EMAIL
                 };
 
-                bool isRegistered = _userRepo.RegisterUser(user);
+                bool isRegistered = await _userRepo.RegisterUser(user);
 
 
                 if (isRegistered)
@@ -95,11 +95,11 @@ namespace BlogBuilder.BusinessLayer.Business
             return BCrypt.Net.BCrypt.EnhancedHashPassword(password , 12);
         }
         
-        private bool isEmailRepetitive(string email)
+        private async Task<bool> isEmailRepetitive(string email)
         {
             try
             {
-                return _userRepo.FindUserByEmail(email) != null;
+                return await _userRepo.FindUserByEmail(email) != null;
             }
             catch(Exception ex)
             {
@@ -107,11 +107,11 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public Dictionary<int,string> GetAllUsernames()
+        public async Task<Dictionary<int,string>> GetAllUsernames()
         {
             try
             {
-                var users = _userRepo.GetAllUsers();
+                var users = await _userRepo.GetAllUsers();
                 var userMap = users.ToDictionary(u => u.USERID, u => u.USERNAME);
                 return userMap;
             }

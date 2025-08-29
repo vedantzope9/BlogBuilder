@@ -5,9 +5,9 @@ namespace BlogBuilder.BusinessLayer.Interfaces
 {
     public interface ICommentsServices
     {
-        CommentsDTO AddComment(CommentsDTO commentsDTO);
-        CommentsDTO UpdateComment(CommentsDTO commentsDTO);
+        Task<CommentsDTO> AddComment(CommentsDTO commentsDTO);
+        Task<CommentsDTO> UpdateComment(CommentsDTO commentsDTO);
 
-        bool DeleteComment(int commentId);
+        Task<bool> DeleteComment(int commentId);
     }
 }

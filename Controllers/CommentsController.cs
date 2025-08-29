@@ -16,25 +16,25 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddComment([FromBody] CommentsDTO commentsDTO)
+        public async Task<IActionResult> AddComment([FromBody] CommentsDTO commentsDTO)
         {
             if (commentsDTO == null || string.IsNullOrWhiteSpace(commentsDTO.COMMENT))
                 return BadRequest("Invalid comment data.");
 
-            _commentsServices.AddComment(commentsDTO);
+            await _commentsServices.AddComment(commentsDTO);
             return Ok();
         }
 
         [HttpPost]
-        public IActionResult UpdateComment(CommentsDTO commentsDTO)
+        public async Task<IActionResult> UpdateComment(CommentsDTO commentsDTO)
         {
-            _commentsServices.UpdateComment(commentsDTO);
+            await _commentsServices.UpdateComment(commentsDTO);
             return View();
         }
 
-        public IActionResult DeleteComment(int commentId)
+        public async Task<IActionResult> DeleteComment(int commentId)
         {
-            _commentsServices.DeleteComment(commentId);
+            await _commentsServices.DeleteComment(commentId);
             return View();
         }
     }

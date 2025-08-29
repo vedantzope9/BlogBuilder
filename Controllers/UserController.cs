@@ -26,15 +26,15 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpGet] 
-        public string? GetUsernameByUserId(int userId)
+        public async Task<string?> GetUsernameByUserId(int userId)
         {
-            return _userServices.GetUsernameByUserId(userId);
+            return await _userServices.GetUsernameByUserId(userId);
         }
 
         [HttpPost]
-        public JsonResult LoginUser(string email, string password)
+        public async Task<JsonResult> LoginUser(string email, string password)
         {
-            return _userServices.LoginUser(email, password);
+            return await _userServices.LoginUser(email, password);
         }
 
         public IActionResult RegisterUser()
@@ -43,15 +43,15 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost]
-        public JsonResult RegisterUser(UserDTO dto)
+        public async Task<JsonResult> RegisterUser(UserDTO dto)
         {   
-            return _userServices.RegisterUser(dto);
+            return await _userServices.RegisterUser(dto);
         }
 
         [HttpGet]
-        public IActionResult GetAllUsernames()
+        public async Task<IActionResult> GetAllUsernames()
         {
-            return Ok(_userServices.GetAllUsernames());
+            return Ok(await _userServices.GetAllUsernames());
         }
     }
 }

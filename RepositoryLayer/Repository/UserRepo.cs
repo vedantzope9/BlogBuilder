@@ -1,5 +1,6 @@
 ﻿using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogBuilder.RepositoryLayer.Repository
 {
@@ -11,30 +12,30 @@ namespace BlogBuilder.RepositoryLayer.Repository
             _context = context;
         }
 
-        public bool RegisterUser(BLOG_USER user)
+        public async Task<bool> RegisterUser(BLOG_USER user)
         {
 
-            _context.BLOG_USER.Add(user);
-            int changes = _context.SaveChanges();
+            await _context.BLOG_USER.AddAsync(user);
+            int changes = await _context.SaveChangesAsync();
 
             return changes > 0;
         }
 
-        public BLOG_USER? FindUserByEmail(string email)
+        public async Task<BLOG_USER?> FindUserByEmail(string email)
         {
-           var entity= _context.BLOG_USER.Where(u => u.EMAIL == email).ToList();
+           var entity= await _context.BLOG_USER.Where(u => u.EMAIL == email).ToListAsync();
 
             return entity.Count==0 ? null : entity[0];
         }
 
-        public BLOG_USER? FindUserById(int userId)
+        public async Task<BLOG_USER?> FindUserById(int userId)
         {
-            return _context.BLOG_USER.Find(userId);
+            return await _context.BLOG_USER.FindAsync(userId);
         }
 
-        public List<BLOG_USER> GetAllUsers()
+        public async Task<List<BLOG_USER>> GetAllUsers()
         {
-            return _context.BLOG_USER.ToList();
+            return await _context.BLOG_USER.ToListAsync();
         }
     }
 }

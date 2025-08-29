@@ -4,10 +4,10 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
 {
     public interface IUserRepo
     {
-        bool RegisterUser(BLOG_USER user);
-        BLOG_USER? FindUserByEmail(string email);
-        BLOG_USER? FindUserById(int userId);
+        Task<bool> RegisterUser(BLOG_USER user);
+        Task<BLOG_USER?> FindUserByEmail(string email);
+        Task<BLOG_USER?> FindUserById(int userId);
 
-        List<BLOG_USER> GetAllUsers();
+        Task<List<BLOG_USER>> GetAllUsers();
     }
 }

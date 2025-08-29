@@ -5,13 +5,13 @@ namespace BlogBuilder.BusinessLayer.Interfaces
 {
     public interface IBlogServices
     {
-        List<BlogDTO> GetAllBlogs();
-        BlogDTO? GetBlogById(int id);
+        Task<List<BlogDTO>> GetAllBlogs();
+        Task<BlogDTO?> GetBlogById(int id);
 
         Task CreateBlog(BlogDTO blogDTO);
 
-        BlogDTO UpdateBlog(BlogDTO blogDTO);
-        bool DeleteBlog(int blogId);
+        Task<BlogDTO> UpdateBlog(BlogDTO blogDTO);
+        Task<bool> DeleteBlog(int blogId);
 
         Task<List<BlogDTO>?> GetBlogsbyUserId(int userId);
     }

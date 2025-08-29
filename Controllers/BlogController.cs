@@ -15,17 +15,17 @@ namespace BlogBuilder.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _blogServices.GetAllBlogs();
+            var list = await _blogServices.GetAllBlogs();
             return View(list);
         }
 
         [AllowAnonymous]
         [HttpGet("/Blog/GetBlogById/{id}")]
-        public IActionResult GetBlogById(int id)
+        public async Task<IActionResult> GetBlogById(int id)
         {
-            var blog = _blogServices.GetBlogById(id);
+            var blog = await _blogServices.GetBlogById(id);
             if (blog == null)
             {
                 return View("NotFound");
@@ -33,6 +33,7 @@ namespace BlogBuilder.Controllers
 
             return View(blog);
         }
+
 
         [HttpGet("/Blog/CreateBlog")]
         public IActionResult CreateBlog()
@@ -50,17 +51,17 @@ namespace BlogBuilder.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult UpdateBlog(BlogDTO blogDTO)
+        public async Task<IActionResult> UpdateBlog(BlogDTO blogDTO)
         {
-            _blogServices.UpdateBlog(blogDTO);
+            await _blogServices.UpdateBlog(blogDTO);
             return View();
         }
 
         [Authorize]
         [HttpDelete]
-        public IActionResult DeleteBlog(int blogId)
+        public async Task<IActionResult> DeleteBlog(int blogId)
         {
-            _blogServices.DeleteBlog(blogId);
+            await _blogServices.DeleteBlog(blogId);
             return View();
         }
 

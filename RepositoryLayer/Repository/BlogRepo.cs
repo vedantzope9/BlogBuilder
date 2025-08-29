@@ -13,23 +13,23 @@ namespace BlogBuilder.RepositoryLayer.Repository
             _context = context;
         }
 
-        public List<BLOG> GetAllBlogs()
+        public async Task<List<BLOG>> GetAllBlogs()
         {
-            return _context.BLOG
+            return await _context.BLOG
                 .Include(b => b.BLOG_COMMENTS)
-                .ToList();
+                .ToListAsync();
         }
 
-        public BLOG? GetBlogById(int id)
+        public async Task<BLOG?> GetBlogById(int id)
         {
             var entity = _context.BLOG
                 .Include(b => b.BLOG_COMMENTS)
-                .FirstOrDefault(b=> b.BLOGID == id);
+                .FirstOrDefaultAsync(b=> b.BLOGID == id);
 
             if (entity == null)
                 return null;
 
-            return entity;
+            return await entity;
         }
 
         public async Task CreateBlog(BLOG blog)
@@ -38,11 +38,11 @@ namespace BlogBuilder.RepositoryLayer.Repository
             await _context.SaveChangesAsync();
         }
 
-        public bool UpdateBlog(BlogDTO updatedBlog)
+        public async Task<bool> UpdateBlog(BlogDTO updatedBlog)
         {
-            var existingBlog = _context.BLOG
+            var existingBlog = await _context.BLOG
                 .Include(b => b.BLOG_COMMENTS)
-                .FirstOrDefault(b => b.BLOGID == updatedBlog.BLOGID);
+                .FirstOrDefaultAsync(b => b.BLOGID == updatedBlog.BLOGID);
 
 
             if (existingBlog == null)
@@ -77,25 +77,22 @@ namespace BlogBuilder.RepositoryLayer.Repository
                     });
                 }
             }
-
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
 
-        public bool DeleteBlog(int blogId)
+        public async Task<bool> DeleteBlog(int blogId)
         {
-            var entity = GetBlogById(blogId);
+            var entity = await GetBlogById(blogId);
 
             if (entity == null)
                 return false;
 
-            foreach(var comments in entity.BLOG_COMMENTS)
-            {
-                _context.BLOG_COMMENTS.Remove(comments);
-            }
+            //Altered constraint Foreign Key 
+            //Added ON DELETE CASCADE 
 
             _context.BLOG.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
 

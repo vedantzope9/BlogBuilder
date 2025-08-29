@@ -5,9 +5,9 @@ namespace BlogBuilder.BusinessLayer.Interfaces
 {
     public interface IUserServices
     {
-        JsonResult RegisterUser(UserDTO dto);
-        JsonResult LoginUser(string email, string password);
-        string? GetUsernameByUserId(int userId);
-        Dictionary<int, string> GetAllUsernames();
+        Task<JsonResult> RegisterUser(UserDTO dto);
+        Task<JsonResult> LoginUser(string email, string password);
+        Task<string?> GetUsernameByUserId(int userId);
+        Task<Dictionary<int, string>> GetAllUsernames();
     }
 }

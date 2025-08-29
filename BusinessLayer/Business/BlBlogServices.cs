@@ -16,12 +16,13 @@ namespace BlogBuilder.BusinessLayer.Business
             _blogRepo = blogRepo;
         }
 
-        public List<BlogDTO> GetAllBlogs()
+        public async Task<List<BlogDTO>> GetAllBlogs()
         {
             try
             {
-                return _blogRepo.GetAllBlogs()
-                .Select(b => new BlogDTO
+                var blogs= await _blogRepo.GetAllBlogs();
+
+                return blogs.Select(b => new BlogDTO
                 {
                     BLOGID = b.BLOGID,
                     USERID = b.USERID,
@@ -50,11 +51,11 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public BlogDTO? GetBlogById(int id)
+        public async Task<BlogDTO?> GetBlogById(int id)
         {
             try
             {
-                var entity = _blogRepo.GetBlogById(id);
+                var entity = await _blogRepo.GetBlogById(id);
 
                 if (entity == null)
                     return null;
@@ -120,11 +121,11 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public BlogDTO UpdateBlog(BlogDTO blogDTO)
+        public async Task<BlogDTO> UpdateBlog(BlogDTO blogDTO)
         {
             try
             {
-                bool res = _blogRepo.UpdateBlog(blogDTO);
+                bool res = await _blogRepo.UpdateBlog(blogDTO);
 
                 if(!res)
                     throw new Exception("Blog not found");
@@ -137,11 +138,11 @@ namespace BlogBuilder.BusinessLayer.Business
             }
         }
 
-        public bool DeleteBlog(int blogId)
+        public async Task<bool> DeleteBlog(int blogId)
         {
             try
             {
-                bool res = _blogRepo.DeleteBlog(blogId);
+                bool res = await _blogRepo.DeleteBlog(blogId);
 
                 if (!res)
                     throw new Exception("Blog not found!");

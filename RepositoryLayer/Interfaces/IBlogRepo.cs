@@ -5,13 +5,13 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
 {
     public interface IBlogRepo
     {
-        List<BLOG> GetAllBlogs();
-        BLOG? GetBlogById(int id);
+        Task<List<BLOG>> GetAllBlogs();
+        Task<BLOG?> GetBlogById(int id);
 
         Task CreateBlog(BLOG blog);
 
-        bool UpdateBlog(BlogDTO blog);
-        bool DeleteBlog(int blogId);
+        Task<bool> UpdateBlog(BlogDTO blog);
+        Task<bool> DeleteBlog(int blogId);
 
         Task<List<BLOG>? > GetBlogsByUserId(int userId);
     }

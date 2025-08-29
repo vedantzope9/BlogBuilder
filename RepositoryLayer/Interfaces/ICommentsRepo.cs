@@ -4,9 +4,9 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
 {
     public interface ICommentsRepo
     {
-        void AddComment(BLOG_COMMENTS comment);
-        bool UpdateComment(BLOG_COMMENTS updatedComment);
+        Task AddComment(BLOG_COMMENTS comment);
+        Task<bool> UpdateComment(BLOG_COMMENTS updatedComment);
 
-        bool DeleteComment(int commentId);
+        Task<bool> DeleteComment(int commentId);
     }
 }

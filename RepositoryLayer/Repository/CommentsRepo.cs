@@ -1,5 +1,6 @@
 ﻿using BlogBuilder.Models;
 using BlogBuilder.RepositoryLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogBuilder.RepositoryLayer.Repository
 {
@@ -11,37 +12,37 @@ namespace BlogBuilder.RepositoryLayer.Repository
             _context = context;
         }
 
-        public void AddComment(BLOG_COMMENTS comment)
+        public async Task AddComment(BLOG_COMMENTS comment)
         {
-            _context.BLOG_COMMENTS.Add(comment);
-            _context.SaveChanges();
+            await _context.BLOG_COMMENTS.AddAsync(comment);
+            await _context.SaveChangesAsync();
         }
 
 
-        public bool UpdateComment(BLOG_COMMENTS updatedComment)
+        public async Task<bool> UpdateComment(BLOG_COMMENTS updatedComment)
         {
-            var existingComment = _context.BLOG_COMMENTS
-                                        .FirstOrDefault(c => c.COMMENTID == updatedComment.COMMENTID);
+            var existingComment = await _context.BLOG_COMMENTS
+                                        .FirstOrDefaultAsync(c => c.COMMENTID == updatedComment.COMMENTID);
 
             if (existingComment == null)
                 return false;
 
             existingComment.COMMENT = updatedComment.COMMENT;
             existingComment.MODIFIED_DATE = updatedComment.MODIFIED_DATE;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
 
         }
 
-        public bool DeleteComment(int commentId)
+        public async Task<bool> DeleteComment(int commentId)
         {
-            var entity = _context.BLOG_COMMENTS.Find(commentId);
+            var entity =await _context.BLOG_COMMENTS.FindAsync(commentId);
 
             if (entity == null)
                 return false;
 
             _context.BLOG_COMMENTS.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
     }
