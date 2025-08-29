@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<BlogBuilder.DTOs.BlogDTO>
 @{
-    //All Blogs
+    // All Blogs
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
-
 <style>
     body {
         background-color: #f8f9fa;
@@ -14,10 +11,10 @@
         transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-    body.dark-mode {
-        background-color: #121212;
-        color: #eee;
-    }
+        body.dark-mode {
+            background-color: #121212;
+            color: #eee;
+        }
 
     .dashboard-header {
         padding: 1rem 0 1rem 0;
@@ -65,10 +62,14 @@
             box-shadow: 0 10px 28px rgba(142, 68, 173, 0.6);
         }
 
+    /* Card */
     .blog-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         border-radius: 1rem;
         background: #fff;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(0,0,0,0.08);
@@ -76,38 +77,80 @@
     }
 
         .blog-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
         }
 
-        .blog-card img {
+        /* Image wrapper */
+        .blog-card .blog-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 180px; /* uniform image height */
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
+            .blog-card .blog-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .blog-card .blog-image span {
+                color: #aaa;
+                font-size: 0.9rem;
+            }
+
+    /* Card body */
     .blog-body {
-        padding: 1.2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1.2rem;
     }
 
     .blog-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: #5e2a7a;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
     }
 
     .blog-meta {
-        font-size: 0.9rem;
-        color: #888;
-        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+        color: #777;
+        margin-bottom: 0.6rem;
     }
 
+    /* Limit excerpt */
     .blog-excerpt {
-        font-size: 1rem;
-        line-height: 1.6;
+        font-size: 0.95rem;
+        line-height: 1.5;
         color: #444;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* show 4 lines max */
+        -webkit-box-orient: vertical;
     }
+
+    .blog-content {
+        word-wrap: break-word;
+        line-height: 1.6;
+    }
+
+        .blog-content .ql-size-small {
+            font-size: 0.75em;
+        }
+
+        .blog-content .ql-size-large {
+            font-size: 1.5em;
+        }
+
+        .blog-content .ql-size-huge {
+            font-size: 2.5em;
+        }
 
     /* Dark Mode */
     body.dark-mode .blog-card {
@@ -139,19 +182,22 @@
                 <div class="col">
                     <a href="/Blog/GetBlogById/@blog.BLOGID" style="text-decoration: none; color: inherit;">
                         <div class="blog-card animate__animated animate__fadeInUp">
+
                             @if (blog.IMAGE_DATA != null)
                             {
-                                var base64Image = Convert.ToBase64String(blog.IMAGE_DATA);
-                                <img src="data:image/png;base64,@base64Image" alt="Blog Image" />
+                                <div class="blog-image">
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(blog.IMAGE_DATA)" alt="Blog Image" />
+                                </div>
                             }
+
                             <div class="blog-body">
                                 <h5 class="blog-title">@blog.BLOG_NAME</h5>
                                 <p class="blog-meta" id="author-@blog.BLOGID" data-userid="@blog.USERID">
                                     Author: Loading... • @blog.MODIFIED_DATE
                                 </p>
-                                <p class="blog-excerpt">
-                                    @Html.Raw(blog.BLOG_CONTENT.Length > 250 ? blog.BLOG_CONTENT.Substring(0, 250) + "..." : blog.BLOG_CONTENT)
-                                </p>
+                                <div class="blog-excerpt blog-content">
+                                    @Html.Raw(blog.BLOG_CONTENT)
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -163,29 +209,26 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-            const username = localStorage.getItem("username");
-            const jwtToken = localStorage.getItem("jwtToken");
+        const username = localStorage.getItem("username");
+        const jwtToken = localStorage.getItem("jwtToken");
 
-            //console.log(jwtToken +" "+username);
+        if (jwtToken && username) {
+            document.getElementById("welcome-text").textContent =
+                "Welcome, " + username + " 👋";
+        }
 
+        // Write Blog Button click
+        document.getElementById("writeBlogBtn").addEventListener("click", function () {
             if (jwtToken && username) {
-                document.getElementById("welcome-text").textContent =
-                    "Welcome, " + username + " 👋";
+                window.location.href = "/Blog/CreateBlog";
+            } else {
+                alert("You must be logged in to write a blog.");
+                window.location.href = "/User/LoginUser";
             }
+        });
 
-            // Write Blog Button click
-            document.getElementById("writeBlogBtn").addEventListener("click", function () {
-
-                if (jwtToken && username) {
-                    window.location.href = "/Blog/CreateBlog";
-                } else {
-                    alert("You must be logged in to write a blog.");
-                    window.location.href = "/User/LoginUser";
-                }
-            });
-
-            // Replace "Loading..." authors with real names
-            fetch("/User/GetAllUsernames")
+        // Replace "Loading..." authors with real names
+        fetch("/User/GetAllUsernames")
             .then(res => res.json())
             .then(userMap => {
                 document.querySelectorAll("[data-userid]").forEach(el => {
