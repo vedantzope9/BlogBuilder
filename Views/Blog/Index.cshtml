@@ -11,23 +11,60 @@
         transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #eee;
-        }
+    body.dark-mode {
+        background-color: #121212;
+        color: #eee;
+    }
 
     .dashboard-header {
-        padding: 1rem 0 1rem 0;
+        padding: 0.5rem 0;
         margin-bottom: 1rem;
-        text-align: center;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .welcome-text {
-        font-size: 1.2rem;
-        font-weight: 500;
+        font-size: 1.4rem;
+        font-weight: 600;
         color: #6a1b9a;
-        margin-bottom: 0.8rem;
-        animation: fadeInDown 1s;
+        padding-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .wave {
+        display: inline-block;
+        animation: wave-hand 2s infinite ease-in-out;
+        transform-origin: 70% 70%;
+    }
+
+    @@keyframes wave-hand {
+        0% {
+            transform: rotate(0deg);
+        }
+        15% {
+            transform: rotate(15deg);
+        }
+
+        30% {
+            transform: rotate(-10deg);
+        }
+
+        45% {
+            transform: rotate(12deg);
+        }
+
+        60% {
+            transform: rotate(-7deg);
+        }
+
+        75% {
+            transform: rotate(10deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
     }
 
     body.dark-mode .welcome-text {
@@ -35,17 +72,24 @@
     }
 
     .dashboard-title {
-        font-size: 2.2rem;
+        text-align: center;
+        font-size: 2rem;
         font-weight: bold;
+        margin-top: 0.5rem 0;
         background: linear-gradient(to right, #9b59b6, #e67e22);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: fadeInUp 1s;
     }
 
+    .dashboard-actions {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
     .btn-gradient {
         display: inline-block;
-        padding: 0.7rem 1.8rem;
+        padding: 0.6rem 1.6rem;
         border-radius: 50px;
         background: linear-gradient(to right, #8e44ad, #5e2a7a);
         color: #fff !important;
@@ -76,32 +120,32 @@
         animation: fadeInUp 1s;
     }
 
-        .blog-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-        }
+    .blog-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
 
-        /* Image wrapper */
-        .blog-card .blog-image {
-            width: 100%;
-            height: 180px; /* uniform image height */
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+    /* Image wrapper */
+    .blog-card .blog-image {
+        width: 100%;
+        height: 180px; /* uniform image height */
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
 
-            .blog-card .blog-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+    .blog-card .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-            .blog-card .blog-image span {
-                color: #aaa;
-                font-size: 0.9rem;
-            }
+    .blog-card .blog-image span {
+        color: #aaa;
+        font-size: 0.9rem;
+    }
 
     /* Card body */
     .blog-body {
@@ -133,6 +177,7 @@
         display: -webkit-box;
         -webkit-line-clamp: 4; /* show 4 lines max */
         -webkit-box-orient: vertical;
+
     }
 
     .blog-content {
@@ -140,17 +185,17 @@
         line-height: 1.6;
     }
 
-        .blog-content .ql-size-small {
-            font-size: 0.75em;
-        }
+    .blog-content .ql-size-small {
+        font-size: 0.75em;
+    }
 
-        .blog-content .ql-size-large {
-            font-size: 1.5em;
-        }
+    .blog-content .ql-size-large {
+        font-size: 1.5em;
+    }
 
-        .blog-content .ql-size-huge {
-            font-size: 2.5em;
-        }
+    .blog-content .ql-size-huge {
+        font-size: 2.5em;
+    }
 
     /* Dark Mode */
     body.dark-mode .blog-card {
@@ -166,22 +211,146 @@
     body.dark-mode .blog-excerpt {
         color: #ccc;
     }
+
+    /* Toolbar */
+    .dashboard-toolbar {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1.2rem auto 0 auto;
+        max-width: 1000px;
+        animation: fadeInUp 1s;
+    }
+
+    .btn-toolbar {
+        padding: 0.6rem 1.4rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-purple {
+        background: linear-gradient(to right, #8e44ad, #5e2a7a);
+        color: #fff;
+    }
+
+    .btn-purple:hover {
+        transform: scale(1.07);
+        box-shadow: 0 8px 22px rgba(142, 68, 173, 0.5);
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 14px;
+        font-size: 1rem;
+        color: #777;
+        pointer-events: none;
+    }
+
+    .search-input, .topic-select {
+        padding: 0.6rem 1rem 0.6rem 2.2rem;
+        border-radius: 50px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .search-blogs {
+        min-width: 350px;
+    }
+
+
+    .topic-select {
+        min-width: 220px; 
+        appearance: none;
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .search-input:focus, .topic-select:focus {
+        border-color: #8e44ad;
+        box-shadow: 0 0 8px rgba(142, 68, 173, 0.4);
+    }
+
+    /* Dark mode toolbar */
+    body.dark-mode .search-input,
+    body.dark-mode .topic-select {
+        background: #1e1e1e;
+        color: #eee;
+        border: 1px solid #555;
+    }
+
+    body.dark-mode .search-input:focus,
+    body.dark-mode .topic-select:focus {
+        border-color: #e0c3fc;
+        box-shadow: 0 0 8px rgba(224, 195, 252, 0.5);
+    }
+
 </style>
 
 <section class="mt-1">
     <div class="container">
         <div class="dashboard-header">
-            <div class="welcome-text" id="welcome-text">Welcome 👋</div>
+            <div class="welcome-text" id="welcome-text">
+                Welcome<span id="username"></span> <span class="wave">👋</span>
+            </div>
             <div class="dashboard-title">Explore All Blogs</div>
-            <a href="javascript:void(0)" id="writeBlogBtn" class="btn btn-gradient">✍️ Write a Blog</a>
+
+            <!-- Toolbar with buttons + inputs -->
+            <div class="dashboard-toolbar">
+                <button id="writeBlogBtn" class="btn-toolbar btn-purple">✍️ Write a Blog</button>
+
+                <div class="input-wrapper">
+                    <span class="input-icon">🔎</span>
+                    <input type="text" id="searchBlogs" class="search-input search-blogs" placeholder="Search Blogs">
+                </div>
+
+                <div class="input-wrapper">
+                    <span class="input-icon">📂</span>
+                    <select class="topic-select" id="topicSelect">
+                        <option value="" disabled selected>-- Select a Category --</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Science">Science</option>
+                        <option value="Health">Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Food">Food</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Movies & Entertainment">Movies & Entertainment</option>
+                        <option value="History">History</option>
+                        <option value="General Knowledge">General Knowledge</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Business">Business</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Art & Culture">Art & Culture</option>
+                        <option value="Environment">Environment</option>
+                    </select>
+                </div>
+                
+                <button class="btn-toolbar btn-purple" id="myBlogsBtn">📚 My Blogs</button>
+            </div>
+
         </div>
+
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach (var blog in Model)
             {
                 <div class="col">
                     <a href="/Blog/GetBlogById/@blog.BLOGID" style="text-decoration: none; color: inherit;">
-                        <div class="blog-card animate__animated animate__fadeInUp">
+                        <div class="blog-card">
 
                             @if (blog.IMAGE_DATA != null)
                             {
@@ -209,17 +378,14 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const username = localStorage.getItem("username");
+        const username = localStorage.getItem("username") || "";
         const jwtToken = localStorage.getItem("jwtToken");
 
-        if (jwtToken && username) {
-            document.getElementById("welcome-text").textContent =
-                "Welcome, " + username + " 👋";
-        }
+        document.getElementById("username").textContent = username;
 
         // Write Blog Button click
         document.getElementById("writeBlogBtn").addEventListener("click", function () {
-            if (jwtToken && username) {
+            if (jwtToken && username!=="") {
                 window.location.href = "/Blog/CreateBlog";
             } else {
                 alert("You must be logged in to write a blog.");
@@ -227,7 +393,16 @@
             }
         });
 
-        // Replace "Loading..." authors with real names
+        // My Blogs Button click
+        document.getElementById("myBlogsBtn").addEventListener("click", function () {
+            if (jwtToken && username !== "") {
+                window.location.href = "/Blog/MyBlogs";
+            } else {
+                alert("You must be logged in to view your blogs.");
+                window.location.href = "/User/LoginUser";
+            }
+        });
+       
         fetch("/User/GetAllUsernames")
             .then(res => res.json())
             .then(userMap => {
@@ -239,5 +414,6 @@
                 });
             })
             .catch(err => console.error("Error fetching usernames:", err));
-    });
+        });
+
 </script>
