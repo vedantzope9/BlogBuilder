@@ -21,27 +21,27 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost("register")]
-        public JsonResult RegisterUser(UserDTO dto)
+        public async Task<JsonResult> RegisterUser(UserDTO dto)
         {
-            return _userServices.RegisterUser(dto);
+            return await _userServices.RegisterUser(dto);
         }
 
         [HttpPost("login")]
-        public JsonResult LoginUser(string email, string password)
+        public async Task<JsonResult> LoginUser(string email, string password)
         {
-            return _userServices.LoginUser(email, password);
+            return await _userServices.LoginUser(email, password);
         }
 
         [HttpGet("GetAllBlogs")]
-        public List<BlogDTO> GetAllBlogs()
+        public async Task<List<BlogDTO>> GetAllBlogs()
         {
-            return _blogServices.GetAllBlogs();
+            return await _blogServices.GetAllBlogs();
         }
 
         [HttpGet("GetBlogById")]
-        public ActionResult GetBlogById(int id)
+        public async Task<ActionResult> GetBlogById(int id)
         {
-            var blog = _blogServices.GetBlogById(id);
+            var blog =await _blogServices.GetBlogById(id);
             if (blog == null)
             {
                 return NotFound();
@@ -51,39 +51,40 @@ namespace BlogBuilder.Controllers
         }
 
         [HttpPost("CreateBlog")]
-        public ActionResult CreateBlog(BlogDTO blogDTO )
+        public async Task<ActionResult> CreateBlog(BlogDTO blogDTO)
         {
-            return Ok(_blogServices.CreateBlog(blogDTO ));
+            await _blogServices.CreateBlog(blogDTO);
+            return Ok("Blog Created Successfully");
         }
 
         [HttpPost("UpdateBlog")]
-        public ActionResult UpdateBlog(BlogDTO blogDTO)
+        public async Task<ActionResult> UpdateBlog(BlogDTO blogDTO)
         {
-            return Ok(_blogServices.UpdateBlog(blogDTO));
+            return Ok(await _blogServices.UpdateBlog(blogDTO));
         }
 
         [HttpDelete("DeleteBlog")]
-        public ActionResult DeleteBlog(int blogId)
+        public async Task<ActionResult> DeleteBlog(int blogId)
         {
-            return Ok(_blogServices.DeleteBlog(blogId));
+            return Ok(await _blogServices.DeleteBlog(blogId));
         }
 
         [HttpPost("AddComment")]
-        public ActionResult AddComment(CommentsDTO commentsDTO)
+        public async Task<ActionResult> AddComment(CommentsDTO commentsDTO)
         {
-            return Ok(_commentsServices.AddComment(commentsDTO));
+            return Ok(await _commentsServices.AddComment(commentsDTO));
         }
 
         [HttpPost("UpdateComment")]
-        public ActionResult UpdateComment(CommentsDTO commentsDTO)
+        public async Task<ActionResult> UpdateComment(CommentsDTO commentsDTO)
         {
-            return Ok(_commentsServices.UpdateComment(commentsDTO));
+            return Ok(await _commentsServices.UpdateComment(commentsDTO));
         }
 
         [HttpDelete("DeleteComment")]
-        public ActionResult DeleteComment(int commentId)
+        public async Task<ActionResult> DeleteComment(int commentId)
         {
-            _commentsServices.DeleteComment(commentId);
+            await _commentsServices.DeleteComment(commentId);
             return Ok("Comment Deleted!");
         }
     }
