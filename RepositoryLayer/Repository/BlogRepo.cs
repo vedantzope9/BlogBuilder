@@ -102,5 +102,27 @@ namespace BlogBuilder.RepositoryLayer.Repository
                     .Where(b => b.USERID == userId)
                     .ToListAsync();
         }
+
+        public async Task<List<BLOG>?> GetBlogsByCategory(string category)
+        {
+            return await _context.BLOG
+                    .Where(b => b.TOPIC_NAME.Equals(category))
+                    .ToListAsync();
+        }
+
+        public async Task<List<BLOG>?> SearchBlogs(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+                return null;
+
+            return await _context.BLOG
+                    .Where(b =>
+                        b.BLOG_NAME.Contains(query) ||
+                        b.TOPIC_NAME.Contains(query) ||
+                        b.BLOG_CONTENT.Contains(query))
+                    .OrderByDescending(b => b.MODIFIED_DATE)
+                    .Take(5)
+                    .ToListAsync();
+        }
     }
 }

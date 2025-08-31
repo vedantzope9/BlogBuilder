@@ -73,5 +73,21 @@ namespace BlogBuilder.Controllers
 
             return View(list);
         }
+
+        [HttpGet("/Blog/GetBlogsByCategory/{category}")]
+        public async Task<IActionResult> GetBlogsByCategory(string category)
+        {
+            var blogs = await _blogServices.GetBlogsByCategory(category);
+
+            return View(blogs);
+        }
+
+        [HttpGet("/Blog/SearchBlogs")]
+        public async Task<IActionResult> SearchBlogs(string query)
+        {
+            var blogs = await _blogServices.SearchBlogs(query);
+
+            return View(blogs);
+        }
     }
 }

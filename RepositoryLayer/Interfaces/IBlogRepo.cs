@@ -14,5 +14,9 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
         Task<bool> DeleteBlog(int blogId);
 
         Task<List<BLOG>? > GetBlogsByUserId(int userId);
+
+        Task<List<BLOG>?> GetBlogsByCategory(string category);
+
+        Task<List<BLOG>?> SearchBlogs(string query);
     }
 }

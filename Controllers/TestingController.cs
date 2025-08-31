@@ -87,5 +87,17 @@ namespace BlogBuilder.Controllers
             await _commentsServices.DeleteComment(commentId);
             return Ok("Comment Deleted!");
         }
+
+        [HttpGet("Blogs/GetBlogsByCategory/{category}")]
+        public async Task<List<BlogDTO>?> GetBlogsByCategory(string category)
+        {
+            return await _blogServices.GetBlogsByCategory(category);
+        }
+
+        [HttpGet("/Blog/SearchBlogs")]
+        public async Task<List<BlogDTO>?> SearchBlogs(string query)
+        {
+            return await _blogServices.SearchBlogs(query);
+        }
     }
 }

@@ -14,5 +14,9 @@ namespace BlogBuilder.BusinessLayer.Interfaces
         Task<bool> DeleteBlog(int blogId);
 
         Task<List<BlogDTO>?> GetBlogsbyUserId(int userId);
+
+        Task<List<BlogDTO>?> GetBlogsByCategory(string category);
+
+        Task<List<BlogDTO>?> SearchBlogs(string query);
     }
 }

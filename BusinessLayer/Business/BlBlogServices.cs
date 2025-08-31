@@ -16,34 +16,13 @@ namespace BlogBuilder.BusinessLayer.Business
             _blogRepo = blogRepo;
         }
 
-        public async Task<List<BlogDTO>> GetAllBlogs()
+        public async Task<List<BlogDTO>?> GetAllBlogs()
         {
             try
             {
                 var blogs= await _blogRepo.GetAllBlogs();
 
-                return blogs.Select(b => new BlogDTO
-                {
-                    BLOGID = b.BLOGID,
-                    USERID = b.USERID,
-                    BLOG_NAME=b.BLOG_NAME,
-                    TOPIC_NAME = b.TOPIC_NAME,
-                    BLOG_CONTENT = b.BLOG_CONTENT,
-                    IMAGE_DATA = b.IMAGE_DATA,
-                    MODIFIED_DATE = b.MODIFIED_DATE,
-                    isUpdated = b.isUpdated,
-
-                    BLOG_COMMENTS = b.BLOG_COMMENTS.Select(c => new CommentsDTO
-                    {
-                        COMMENTID = c.COMMENTID,
-                        BLOGID = c.BLOGID,
-                        USERID = c.USERID,
-                        COMMENT = c.COMMENT,
-                        MODIFIED_DATE=c.MODIFIED_DATE
-
-                    }).ToList()
-
-                }).ToList();
+                return MapBlogToBlogDto(blogs);
             }
             catch(Exception ex)
             {
@@ -164,33 +143,72 @@ namespace BlogBuilder.BusinessLayer.Business
                 if (blogs == null)
                     return null;
 
-                return blogs
-                    .Select(b => new BlogDTO{
-                        BLOGID = b.BLOGID,
-                        USERID = b.USERID,
-                        BLOG_NAME = b.BLOG_NAME,
-                        TOPIC_NAME = b.TOPIC_NAME,
-                        BLOG_CONTENT = b.BLOG_CONTENT,
-                        IMAGE_DATA = b.IMAGE_DATA,
-                        MODIFIED_DATE = b.MODIFIED_DATE,
-                        isUpdated = b.isUpdated,
-
-                        BLOG_COMMENTS = b.BLOG_COMMENTS.Select(c => new CommentsDTO
-                        {
-                            COMMENTID = c.COMMENTID,
-                            BLOGID = c.BLOGID,
-                            USERID = c.USERID,
-                            COMMENT = c.COMMENT,
-                            MODIFIED_DATE = c.MODIFIED_DATE
-
-                        }).ToList()
-
-                    }).ToList();
+                return MapBlogToBlogDto(blogs);
             }
             catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<List<BlogDTO>?> GetBlogsByCategory(string category)
+        {
+            try
+            {
+                var blogs = await _blogRepo.GetBlogsByCategory(category);
+
+                if (blogs == null)
+                    return null;
+
+                return MapBlogToBlogDto(blogs);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<BlogDTO>?> SearchBlogs(string query)
+        {
+            try
+            {
+                var blogs = await _blogRepo.SearchBlogs(query);
+
+                return MapBlogToBlogDto(blogs);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private List<BlogDTO>? MapBlogToBlogDto(List<BLOG>? blogs)
+        {
+            if (blogs == null || blogs.Count == 0)
+                return null;
+
+            return blogs
+                .Select(b => new BlogDTO
+                {
+                    BLOGID = b.BLOGID,
+                    USERID = b.USERID,
+                    BLOG_NAME = b.BLOG_NAME,
+                    TOPIC_NAME = b.TOPIC_NAME,
+                    BLOG_CONTENT = b.BLOG_CONTENT,
+                    IMAGE_DATA = b.IMAGE_DATA,
+                    MODIFIED_DATE = b.MODIFIED_DATE,
+                    isUpdated = b.isUpdated,
+
+                    BLOG_COMMENTS = b.BLOG_COMMENTS?.Select(c => new CommentsDTO
+                    {
+                        COMMENTID = c.COMMENTID,
+                        BLOGID = c.BLOGID,
+                        USERID = c.USERID,
+                        COMMENT = c.COMMENT,
+                        MODIFIED_DATE = c.MODIFIED_DATE
+
+                    }).ToList() ?? new List<CommentsDTO>() // Handle null BLOG_COMMENTS
+                }).ToList();
         }
     }
 }
