@@ -1,0 +1,149 @@
+﻿:root {
+    --bg-light: #fdfdfd;
+    --text-light: #111;
+    --bg-dark: #121212;
+    --text-dark: #f1f1f1;
+    --card-light: #fff;
+    --card-dark: #1e1e1e;
+    --accent: #7f5af0;
+    --input-border: #ccc;
+    --gradient: linear-gradient(to right, #7f5af0, #6246ea);
+}
+
+/* Light mode (default) */
+body {
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* Dark mode */
+body.dark-mode {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.blog-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    font-family: 'Figtree', sans-serif;
+    transition: background 0.4s, color 0.4s;
+}
+
+input[type="text"], input[type="file"],
+.topic-select, .topic-other,
+.ql-editor, .ql-toolbar {
+    padding: 0.6rem;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background-color: var(--card-light);
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="file"],
+body.dark-mode .topic-select,
+body.dark-mode .topic-other,
+body.dark-mode .ql-editor,
+body.dark-mode .ql-toolbar {
+    background-color: var(--card-dark);
+    color: var(--text-dark);
+    border-color: #444;
+}
+
+select option {
+    background: var(--card-light);
+    color: var(--text-light);
+}
+
+body.dark-mode select option {
+    background: var(--card-dark);
+    color: var(--text-dark);
+}
+
+.blog-title {
+    text-align: center;
+    font-size: 2.3rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.btn-submit {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(127, 90, 240, 0.3);
+}
+
+.ql-container {
+    min-height: 250px;
+}
+
+.ql-toolbar.ql-snow, .ql-container.ql-snow {
+    border-radius: 6px;
+}
+
+#imagePreview {
+    max-width: 200px;
+    margin-top: 10px;
+    display: none;
+    border-radius: 6px;
+}
+
+.topic-group {
+    margin-bottom: 1.2rem;
+}
+
+.topic-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.topic-select, .topic-other {
+    width: 100%;
+    padding: 0.65rem;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background-color: inherit;
+    color: inherit;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.topic-select:focus, .topic-other:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 5px rgba(127, 90, 240, 0.4);
+}
+
+.topic-other {
+    margin-top: 0.7rem;
+    display: none;
+}

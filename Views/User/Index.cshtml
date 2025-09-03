@@ -3,85 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .hero {
-        padding: 6rem 1rem 4rem;
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 650;
-        background: linear-gradient(to right, #9b59b6, #e67e22);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-        font-size: 1.3rem;
-        max-width: 720px;
-        margin: 1rem auto 2rem;
-    }
-
-    .cta-btn {
-        padding: 0.75rem 2.2rem;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        background: linear-gradient(to right, #8e44ad, #5e2a7a);
-        color: white;
-        border: none;
-        box-shadow: 0 0 12px rgba(138, 43, 226, 0.5);
-        transition: all 0.3s ease;
-    }
-
-    .cta-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
-    }
-
-    .features {
-        padding: 4rem 1rem;
-    }
-
-    .feature-box {
-        background-color: #ffffff;
-        border-radius: 12px;
-        padding: 2rem;
-        transition: background 0.4s, transform 0.3s, border 0.4s;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-        border: 2px solid black;
-    }
-
-    body.dark-mode .feature-box {
-        background-color: #1e1e1e;
-        border: 2px solid white; 
-        box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
-    }
-
-
-    .feature-box:hover {
-        transform: translateY(-5px);
-    }
-
-    .feature-box i {
-        font-size: 2.5rem;
-        color: #8e44ad;
-        margin-bottom: 1rem;
-    }
-
-    @@media (max-width: 768px) {
-        .hero h1
-
-    {
-        font-size: 2.2rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
-    }
-
-    }
-</style>
+<link rel="stylesheet" href="~/css/User/Index.css" />
 
 <section class="hero">
     <h1>Welcome to BlogBuilder</h1>
@@ -117,17 +39,4 @@
     </div>
 </section>
 
-<script>
-
-    // Handle Get Started button click
-    document.getElementById("startBtn").addEventListener("click", function (e) {
-        e.preventDefault();
-        const token = localStorage.getItem("jwtToken");
-
-        if (token) {
-            window.location.href = "/Blog/Index";
-        } else {
-            window.location.href = "/User/LoginUser"; 
-        }
-    });
-</script>
+<script src="~/js/User/Index.js" />

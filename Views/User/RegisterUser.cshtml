@@ -6,81 +6,8 @@
     ViewData["Title"] = "Register";
     var passwordPattern = @"(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}";
 }
-<style>
-    :root {
-        --primary: #8e44ad;
-        --accent: #e67e22;
-        --footer-dark: #121212;
-    }
 
-    .register-section {
-        min-height: calc(100vh - 100px);
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        background: linear-gradient(to bottom right, #fdfbfb, #d9f0ff);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: background 0.5s;
-    }
-
-    body.dark-mode .register-section {
-        background: #1a1a1a;
-    }
-
-    .register-card {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        padding: 1.5rem !important;
-        transition: background-color 0.4s, border-color 0.4s;
-    }
-
-    body.dark-mode .register-card {
-        background-color: #2b2b2b;
-        color: #f2f2f2;
-        border-color: #444;
-    }
-
-    .register-card input.form-control {
-        border-radius: 50px;
-        font-size: 1rem;
-    }
-
-    .register-card input.form-control:focus {
-        box-shadow: 0 0 0 0.2rem rgba(142, 68, 173, 0.25);
-        border-color: var(--primary);
-    }
-
-    .cta-btn {
-        padding: 0.8rem 2.2rem;
-        border: none;
-        border-radius: 50px;
-        background: linear-gradient(120deg, var(--primary), #5e2a7a);
-        background-size: 200%;
-        background-position: left;
-        color: #fff;
-        font-weight: 600;
-        font-size: 1.1rem;
-        transition: all 0.4s ease;
-        box-shadow: 0 0 12px rgba(138, 43, 226, 0.5);
-    }
-
-    .cta-btn:hover {
-        background-position: right;
-        transform: scale(1.05);
-        box-shadow: 0 0 18px rgba(138, 43, 226, 0.6);
-    }
-
-    .cta-btn.clicked {
-        animation: slideBg 1s ease-in-out;
-    }
-
-    @@keyframes slideBg {
-        0% { background-position: left; }
-        50% { background-position: right; }
-        100% { background-position: left; }
-    }
-</style>
+<link rel="stylesheet" href="~/css/User/RegisterUser.css" />
 
 <section class="register-section">
     <div class="card register-card p-4 shadow-lg rounded-4" style="max-width: 460px; width: 100%;">
@@ -127,9 +54,6 @@
                 </button>
             </div>
 
-
-
-
             <button type="submit" class="btn w-100 cta-btn">Register</button>
         </form>
 
@@ -144,63 +68,6 @@
 
 @section Scripts {
     <text>
-        <script>
-            $(document).ready(function () {
-                // Persist dark mode on this page
-                const isDark = localStorage.getItem("theme") === "dark";
-                if (isDark) {
-                    $('body').addClass('dark-mode');
-                    $('#themeToggle').removeClass('fa-moon').addClass('fa-sun');
-                }
-
-                $('#togglePassword').on('click', function () {
-                    const passwordInput = $('#password');
-                    const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
-                    passwordInput.attr('type', type);
-
-                    const icon = $(this).find('i');
-                    if (type === 'text') {
-                        icon.removeClass('fa-eye').addClass('fa-eye-slash');
-                    } else {
-                        icon.removeClass('fa-eye-slash').addClass('fa-eye');
-                    }
-                });
-
-
-                $('#registerForm').on('submit', function (e) {
-                    e.preventDefault();
-                    const username = $('#username').val().trim();
-                    const email = $('#email').val().trim();
-                    const password = $('#password').val().trim();
-                    const $btn = $('.cta-btn');
-                    $btn.removeClass('clicked');
-                    void $btn[0].offsetWidth;
-                    $btn.addClass('clicked');
-
-
-                    if (!username || !email || !password) {
-                        alert("All fields are required.");
-                        return;
-                    }
-
-                    $.ajax({
-                        url: '/User/RegisterUser',
-                        type: 'POST',
-                        data: { username, email, password },
-                        success: function (response) {
-                            if (response.success) {
-                                alert("Registration Successful!");
-                                window.location.href = "/User/LoginUser";
-                            } else {
-                                alert(response.message || "Registration failed.");
-                            }
-                        },
-                        error: function () {
-                            alert("Server error. Please try again.");
-                        }
-                    });
-                });
-            });
-        </script>
+        <script src="~/js/User/RegisterUser.js"></script>
     </text>
 }

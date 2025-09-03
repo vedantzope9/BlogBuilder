@@ -1,0 +1,80 @@
+﻿:root {
+    --primary: #8e44ad;
+    --accent: #e67e22;
+    --footer-dark: #121212;
+}
+
+.login-section {
+    min-height: calc(90vh - 90px);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to bottom right, #fdfbfb, #d9f0ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.5s;
+}
+
+body.dark-mode .login-section {
+    background: #1a1a1a;
+}
+
+.login-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.4s, border-color 0.4s;
+}
+
+body.dark-mode .login-card {
+    background-color: #2b2b2b;
+    color: #f2f2f2;
+    border-color: #444;
+}
+
+.login-card input.form-control {
+    border-radius: 50px;
+    font-size: 1rem;
+}
+
+.login-card input.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(142, 68, 173, 0.25);
+    border-color: var(--primary);
+}
+
+.cta-btn {
+    padding: 0.8rem 2.2rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(120deg, var(--primary), #5e2a7a);
+    background-size: 200%;
+    background-position: left;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.5);
+}
+
+.cta-btn:hover {
+    background-position: right;
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(138, 43, 226, 0.6);
+}
+
+.cta-btn.clicked {
+    animation: slideBg 1s ease-in-out;
+}
+
+@keyframes slideBg {
+    0% {
+        background-position: left;
+    }
+
+    50% {
+        background-position: right;
+    }
+
+    100% {
+        background-position: left;
+    }
+}

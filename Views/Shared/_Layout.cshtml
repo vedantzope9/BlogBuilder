@@ -13,60 +13,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="~/css/Shared/_Layout.css" />
 
-    <style>
-        :root {
-            --bg-dark: #1e1e1e;
-            --text-dark: #f0f0f0;
-            --feature-bg-dark: #2a2a2a;
-            --footer-dark: #121212;
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        body.dark-mode {
-            background: var(--bg-dark) !important;
-            color: var(--text-dark);
-        }
-
-        .navbar {
-            background: linear-gradient(to right, #a267e4, #8433c5);
-        }
-
-        .navbar-brand,
-        .nav-link,
-        .toggle-btn {
-            color: #fff !important;
-            font-weight: 500;
-        }
-
-        .toggle-btn {
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 0.25rem;
-            text-align: center;
-            transition: background-color 0.4s ease, color 0.3s ease;
-        }
-
-        body.dark-mode footer {
-            background-color: var(--footer-dark);
-            color: #888;
-        }
-
-        body > .container {
-            flex: 1;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -108,43 +56,7 @@
     <!-- Quill and Scripts -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
-    <script>
-        const themeToggle = document.getElementById("themeToggle");
-        const body = document.body;
-
-        // Load theme on page load
-        const isDark = localStorage.getItem("theme") === "dark";
-        if (isDark) {
-            body.classList.add("dark-mode");
-            themeToggle.classList.remove("fa-moon");
-            themeToggle.classList.add("fa-sun");
-        }
-
-        themeToggle.addEventListener("click", () => {
-            body.classList.toggle("dark-mode");
-            const isDarkNow = body.classList.contains("dark-mode");
-            localStorage.setItem("theme", isDarkNow ? "dark" : "light");
-            themeToggle.classList.toggle("fa-moon");
-            themeToggle.classList.toggle("fa-sun");
-        });
-
-        
-
-        const currentVersion = '@Context.Items["AppVersion"]';
-        const storedVersion = localStorage.getItem("appVersion");
-
-        //console.log(currentVersion  +" "+storedVersion);
-
-        if(currentVersion !== storedVersion){
-             localStorage.removeItem("jwtToken");
-             localStorage.removeItem("username");
-             localStorage.removeItem("userid");
-
-             localStorage.setItem("appVersion" , currentVersion);
-        }
-
-    </script>
-
+    <script src="~/js/Shared/_Layout.js"></script>
 
 
     @RenderSection("Scripts", required: false)
