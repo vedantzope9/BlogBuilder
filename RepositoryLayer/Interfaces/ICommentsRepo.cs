@@ -8,5 +8,7 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
         Task<bool> UpdateComment(BLOG_COMMENTS updatedComment);
 
         Task<bool> DeleteComment(int commentId);
+
+        Task<List<BLOG_COMMENTS>> GetCommentsByBlogId(int blogId, int pageNumber);
     }
 }

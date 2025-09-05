@@ -13,10 +13,12 @@ namespace BlogBuilder.RepositoryLayer.Repository
             _context = context;
         }
 
-        public async Task<List<BLOG>> GetAllBlogs()
+        public async Task<List<BLOG>> GetAllBlogs(int pageNumber)
         {
             return await _context.BLOG
-                .Include(b => b.BLOG_COMMENTS)
+                .OrderByDescending(b => b.MODIFIED_DATE)
+                .Skip((pageNumber-1)*10)
+                .Take(10)
                 .ToListAsync();
         }
 

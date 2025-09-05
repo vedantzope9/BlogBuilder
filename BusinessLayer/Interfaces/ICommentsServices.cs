@@ -9,5 +9,7 @@ namespace BlogBuilder.BusinessLayer.Interfaces
         Task<CommentsDTO> UpdateComment(CommentsDTO commentsDTO);
 
         Task<bool> DeleteComment(int commentId);
+
+        Task<List<CommentsDTO>> GwtCommentsByBlogId(int blogId, int pageNumber);
     }
 }

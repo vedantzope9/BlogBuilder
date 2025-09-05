@@ -45,5 +45,15 @@ namespace BlogBuilder.RepositoryLayer.Repository
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<BLOG_COMMENTS>> GetCommentsByBlogId(int blogId, int pageNumber)
+        {
+            return await _context.BLOG_COMMENTS
+                    .Where(c => c.BLOGID == blogId)
+                    .OrderByDescending(c => c.MODIFIED_DATE)
+                    .Skip((pageNumber-1)*10)
+                    .Take(10)
+                    .ToListAsync();
+        }
     }
 }

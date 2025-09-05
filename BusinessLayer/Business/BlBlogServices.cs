@@ -16,11 +16,11 @@ namespace BlogBuilder.BusinessLayer.Business
             _blogRepo = blogRepo;
         }
 
-        public async Task<List<BlogDTO>?> GetAllBlogs()
+        public async Task<List<BlogDTO>?> GetAllBlogs(int pageNumber)
         {
             try
             {
-                var blogs= await _blogRepo.GetAllBlogs();
+                var blogs= await _blogRepo.GetAllBlogs(pageNumber);
 
                 return MapBlogToBlogDto(blogs);
             }
@@ -197,17 +197,7 @@ namespace BlogBuilder.BusinessLayer.Business
                     BLOG_CONTENT = b.BLOG_CONTENT,
                     IMAGE_DATA = b.IMAGE_DATA,
                     MODIFIED_DATE = b.MODIFIED_DATE,
-                    isUpdated = b.isUpdated,
-
-                    BLOG_COMMENTS = b.BLOG_COMMENTS?.Select(c => new CommentsDTO
-                    {
-                        COMMENTID = c.COMMENTID,
-                        BLOGID = c.BLOGID,
-                        USERID = c.USERID,
-                        COMMENT = c.COMMENT,
-                        MODIFIED_DATE = c.MODIFIED_DATE
-
-                    }).ToList() ?? new List<CommentsDTO>() // Handle null BLOG_COMMENTS
+                    isUpdated = b.isUpdated
                 }).ToList();
         }
     }

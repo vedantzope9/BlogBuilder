@@ -5,7 +5,7 @@ namespace BlogBuilder.BusinessLayer.Interfaces
 {
     public interface IBlogServices
     {
-        Task<List<BlogDTO>> GetAllBlogs();
+        Task<List<BlogDTO>> GetAllBlogs(int pageNumber);
         Task<BlogDTO?> GetBlogById(int id);
 
         Task CreateBlog(BlogDTO blogDTO);

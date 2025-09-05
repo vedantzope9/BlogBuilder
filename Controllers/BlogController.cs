@@ -15,9 +15,9 @@ namespace BlogBuilder.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var list = await _blogServices.GetAllBlogs();
+            var list = await _blogServices.GetAllBlogs(pageNumber);
             return View(list);
         }
 
@@ -82,12 +82,16 @@ namespace BlogBuilder.Controllers
             return View(blogs);
         }
 
-        [HttpGet("/Blog/SearchBlogs")]
+        [HttpGet("/Blog/SearchBlogs/{query}")]
         public async Task<IActionResult> SearchBlogs(string query)
         {
             var blogs = await _blogServices.SearchBlogs(query);
 
-            return View(blogs);
+            return Ok(blogs.Select(b => new {
+                b.BLOGID,
+                b.BLOG_NAME,
+                b.TOPIC_NAME
+            }));
         }
     }
 }

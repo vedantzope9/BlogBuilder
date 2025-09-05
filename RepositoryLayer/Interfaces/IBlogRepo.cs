@@ -5,7 +5,7 @@ namespace BlogBuilder.RepositoryLayer.Interfaces
 {
     public interface IBlogRepo
     {
-        Task<List<BLOG>> GetAllBlogs();
+        Task<List<BLOG>> GetAllBlogs(int pageNumber);
         Task<BLOG?> GetBlogById(int id);
 
         Task CreateBlog(BLOG blog);

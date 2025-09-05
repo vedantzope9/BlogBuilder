@@ -11,13 +11,13 @@ namespace BlogBuilder.DTOs
 
         public int? USERID { get; set; }
 
-        public string BLOG_NAME { get; set; }
-        public string TOPIC_NAME { get; set; }
+        public required string BLOG_NAME { get; set; }
+        public required string TOPIC_NAME { get; set; }
 
-        public string BLOG_CONTENT { get; set; }
+        public required string BLOG_CONTENT { get; set; }
 
-        public byte[] IMAGE_DATA { get; set; }
-        public IFormFile image { get; set; }
+        public byte[]? IMAGE_DATA { get; set; }
+        public IFormFile? image { get; set; }
 
         public DateOnly? MODIFIED_DATE { get; set; }
 

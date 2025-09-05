@@ -5,7 +5,7 @@ using BlogBuilder.RepositoryLayer.Interfaces;
 
 namespace BlogBuilder.BusinessLayer.Business
 {
-    public class BlCommentsServices:ICommentsServices
+    public class BlCommentsServices : ICommentsServices
     {
         private readonly ICommentsRepo _commentsRepo;
 
@@ -72,6 +72,28 @@ namespace BlogBuilder.BusinessLayer.Business
                     throw new Exception("Comment not found");
 
                 return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<CommentsDTO>> GwtCommentsByBlogId(int blogId, int pageNumber)
+        {
+            try
+            {
+                var comments = await _commentsRepo.GetCommentsByBlogId(blogId, pageNumber);
+
+                return comments.Select(c => new CommentsDTO
+                {
+                    COMMENTID = c.COMMENTID,
+                    BLOGID = c.BLOGID,
+                    USERID = c.USERID,
+                    COMMENT = c.COMMENT,
+                    MODIFIED_DATE = c.MODIFIED_DATE
+                }).ToList();
+
             }
             catch(Exception ex)
             {
